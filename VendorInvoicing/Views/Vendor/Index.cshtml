@@ -1,15 +1,61 @@
-﻿@model List<Vendor>
+﻿@model VendorViewModel
 @{
     ViewData["Title"] = "Vendor Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Vendors</h1>
-    <form id="vendorAddRequest" asp-controller="Vendor" asp-action="Add">
-        <button class="btn btn-primary" type="submit" onclick="event.preventDefault(); document.getElementById('vendorAddRequest').submit();">
-            Add
-        </button>
-    </form>
+    <div class="d-flex justify-content-center">
+        <form class="m-1" id="vendorAllRequest" asp-controller="Vendor" asp-action="List" method="post" enctype="application/x-www-form-urlencoded">
+            <input type="hidden" name="startingLetter" value="A"/>
+            <input type="hidden" name="endingLetter" value="Z"/>
+            <button class="btn btn-outline-secondary" type="submit" onclick="event.preventDefault(); document.getElementById('vendorAllRequest').submit();">
+                All
+            </button>
+        </form>
+        <form class="m-1" id="vendorAERequest" asp-controller="Vendor" asp-action="List" method="post" enctype="application/x-www-form-urlencoded">
+            <input type="hidden" name="startingLetter" value="A"/>
+            <input type="hidden" name="endingLetter" value="E"/>
+            <button class="btn btn-outline-secondary" type="submit" onclick="event.preventDefault(); document.getElementById('vendorAERequest').submit();">
+                A - E
+            </button>
+        </form>
+        <form class="m-1" id="vendorFJRequest" asp-controller="Vendor" asp-action="List" method="post" enctype="application/x-www-form-urlencoded">
+            <input type="hidden" name="startingLetter" value="F"/>
+            <input type="hidden" name="endingLetter" value="J"/>
+            <button class="btn btn-outline-secondary" type="submit" onclick="event.preventDefault(); document.getElementById('vendorFJRequest').submit();">
+                F - J
+            </button>
+        </form>
+        <form class="m-1" id="vendorKORequest" asp-controller="Vendor" asp-action="List" method="post" enctype="application/x-www-form-urlencoded">
+            <input type="hidden" name="startingLetter" value="K"/>
+            <input type="hidden" name="endingLetter" value="O"/>
+            <button class="btn btn-outline-secondary" type="submit" onclick="event.preventDefault(); document.getElementById('vendorKORequest').submit();">
+                K - O
+            </button>
+        </form>
+        <form class="m-1" id="vendorPTRequest" asp-controller="Vendor" asp-action="List" method="post" enctype="application/x-www-form-urlencoded">
+            <input type="hidden" name="startingLetter" value="P"/>
+            <input type="hidden" name="endingLetter" value="T"/>
+            <button class="btn btn-outline-secondary" type="submit" onclick="event.preventDefault(); document.getElementById('vendorPTRequest').submit();">
+                P - T
+            </button>
+        </form>
+        <form class="m-1" id="vendorUZRequest" asp-controller="Vendor" asp-action="List" method="post" enctype="application/x-www-form-urlencoded">
+            <input type="hidden" name="startingLetter" value="U"/>
+            <input type="hidden" name="endingLetter" value="Z"/>
+            <button class="btn btn-outline-secondary" type="submit" onclick="event.preventDefault(); document.getElementById('vendorUZRequest').submit();">
+                U - Z
+            </button>
+        </form>
+        <form class="m-1 bd-highlight" id="vendorAddRequest" asp-controller="Vendor" asp-action="Add">
+            <button class="btn btn-primary" type="submit" onclick="event.preventDefault(); document.getElementById('vendorAddRequest').submit();">
+                Add New Vendor
+            </button>
+        </form>
+    </div>
+    
+    
 </div>
 <div>
     <table class="table table-hover">
@@ -17,40 +63,36 @@
             <tr>
                 <th scope="col" class="text-nowrap">#</th>
                 <th scope="col" class="text-nowrap">Name</th>
-                <th scope="col" class="text-nowrap">Province<br>Or State</th>
-                <th scope="col" class="text-nowrap">Zip Or<br>Postal Code</th>
                 <th scope="col" class="text-nowrap">Vendor Phone</th>
-                <th scope="col" class="text-nowrap">Vendor Contact<br>Last Name</th>
-                <th scope="col" class="text-nowrap">Vendor Contact<br>First Name</th>
+                <th scope="col" class="text-nowrap">Vendor Contact<br/>Last Name</th>
+                <th scope="col" class="text-nowrap">Vendor Contact<br/>First Name</th>
                 <th scope="col" class="text-nowrap">Vendor Contact Email</th>
-                <th scope="col"><br></th>
-                <th scope="col"><br></th>
+                <th scope="col"><br/></th>
+                <th scope="col"><br/></th>
             </tr>
         </thead>
         <tbody>
-            @if (Model != null)
+            @if (Model.vendors != null)
             {
-                @for(int i = 0; i < Model.Count; i++)
+                @for(int i = 0; i < Model.vendors.Count; i++)
                 {
                     
                     <tr scope="row">
                         <td>@(i + 1)</td>
-                        <td>@Model.ElementAt(i).Name</td>
-                        <td>@Model.ElementAt(i).ProvinceOrState</td>
-                        <td>@Model.ElementAt(i).ZipOrPostalCode</td>
-                        <td class="text-nowrap">@Model.ElementAt(i).VendorPhone</td>
-                        <td>@Model.ElementAt(i).VendorContactLastName</td>
-                        <td>@Model.ElementAt(i).VendorContactFirstName</td>
-                        <td>@Model.ElementAt(i).VendorContactEmail</td>
+                        <td>@Model.vendors.ElementAt(i).Name</td>
+                        <td class="text-nowrap">@Model.vendors.ElementAt(i).VendorPhone</td>
+                        <td>@Model.vendors.ElementAt(i).VendorContactLastName</td>
+                        <td>@Model.vendors.ElementAt(i).VendorContactFirstName</td>
+                        <td>@Model.vendors.ElementAt(i).VendorContactEmail</td>
                         <td>
-                            <form id="vendorEditRequest" asp-controller="Vendor" asp-action="Edit" asp-route-vendor="@Model.ElementAt(i).VendorId">
+                            <form id="vendorEditRequest" asp-controller="Vendor" asp-action="Edit" asp-route-vendor="@Model.vendors.ElementAt(i).VendorId">
                                 <button class="btn btn-outline-primary" type="submit" onclick="event.preventDefault(); document.getElementById('vendorEditRequest').submit();">
                                     Edit
                                 </button>
                             </form>
                         </td>
                         <td>
-                            <form id="vendorInvoicesRequest" asp-controller="Vendor" asp-action="Invoices" asp-route-id="@Model.ElementAt(i).VendorId">
+                            <form id="vendorInvoicesRequest" asp-controller="Vendor" asp-action="Invoices" asp-route-id="@Model.vendors.ElementAt(i).VendorId">
                                 <button class="btn btn-outline-primary" type="submit" onclick="event.preventDefault(); document.getElementById('vendorInvoicesRequest').submit();">
                                     Invoices
                                 </button>

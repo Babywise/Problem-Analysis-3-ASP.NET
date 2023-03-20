@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VendorInvoicing.Entities;
+using VendorInvoicing.Models;
 
-namespace RESTfulStateTransfer.Controllers
+namespace VendorInvoicing.Controllers
 {
     public class VendorController : Controller
     {
@@ -10,11 +11,38 @@ namespace RESTfulStateTransfer.Controllers
             _vendorsContext = vendorsContext;
         }
 
-        public IActionResult Index()
+        [HttpGet()]
+        public IActionResult Index([FromQuery]VendorViewModel vendorViewModel)
         {
-            List<Vendor> vendors = _vendorsContext.Vendors
-                .OrderBy(v => v.Name).ToList();
-            return View(vendors);
+            if (vendorViewModel.startingLetter != null && vendorViewModel.endingLetter != null)
+            {
+                vendorViewModel.vendors = _vendorsContext.Vendors
+                    .OrderBy(v => v.Name)
+                    .Where(e => e.Name.CompareTo(vendorViewModel.startingLetter) >= 0 && e.Name.CompareTo(vendorViewModel.endingLetter) <= 0)
+                    .ToList();
+                return View(vendorViewModel);
+            }
+            else
+            {
+                vendorViewModel = new VendorViewModel()
+                {
+                    vendors = _vendorsContext.Vendors
+                    .OrderBy(v => v.Name).ToList(),
+                    startingLetter = "A",
+                    endingLetter = "Z"
+                };
+            }
+            return View(vendorViewModel);
+        }
+        [HttpPost()]
+        public IActionResult List(VendorViewModel vendorViewModel)
+        {
+            if (vendorViewModel.startingLetter != null && vendorViewModel.endingLetter != null)
+            {
+                
+                return RedirectToAction("Index", vendorViewModel);
+            }
+            return RedirectToAction("Index");
         }
 
         public IActionResult Edit(int id)
