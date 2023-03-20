@@ -12,5 +12,6 @@
         public int? InvoiceId { get; set; }
 
         // Nav prop to invoice:
+        public Invoice? Invoice { get; set; }
     }
 }

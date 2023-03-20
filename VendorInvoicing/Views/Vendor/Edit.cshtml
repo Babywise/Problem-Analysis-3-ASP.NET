@@ -1,0 +1,45 @@
+﻿@model Vendor
+@{
+    ViewData["Title"] = "Vendor Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Vendors</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Address</th>
+                <th scope="col">City</th>
+                <th scope="col">ProvinceOrState</th>
+                <th scope="col">ZipOrPostalCode</th>
+                <th scope="col">VendorPhone</th>
+                <th scope="col">VendorContactLastName</th>
+                <th scope="col">VendorContactFirstName</th>
+                <th scope="col">VendorContactEmail</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                
+                <tr scope="row">
+                    <td>@Model.Name</td>
+                    <td>
+                        @Model.Address1<br><br>
+                        @Model.Address2
+                    </td>
+                    <td>@Model.City</td>
+                    <td>@Model.ProvinceOrState</td>
+                    <td>@Model.ZipOrPostalCode</td>
+                    <td>@Model.VendorPhone</td>
+                    <td>@Model.VendorContactLastName</td>
+                    <td>@Model.VendorContactFirstName</td>
+                    <td>@Model.VendorContactEmail</td>
+
+                </tr>
+                
+            }
+        </tbody>
+    </table>
+</div>
