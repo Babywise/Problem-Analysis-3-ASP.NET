@@ -85,8 +85,8 @@
                         <td>@Model.vendors.ElementAt(i).VendorContactFirstName</td>
                         <td>@Model.vendors.ElementAt(i).VendorContactEmail</td>
                         <td>
-                            <form id="vendorEditRequest" asp-controller="Vendor" asp-action="Edit" asp-route-vendor="@Model.vendors.ElementAt(i).VendorId">
-                                <button class="btn btn-outline-primary" type="submit" onclick="event.preventDefault(); document.getElementById('vendorEditRequest').submit();">
+                            <form id="vendorEditRequest{@i}" asp-controller="Vendor" asp-action="Edit" asp-route-id="@Model.vendors.ElementAt(i).VendorId">
+                                <button class="btn btn-outline-primary" type="submit" onclick="event.preventDefault(); document.getElementById('vendorEditRequest{@i}').submit();">
                                     Edit
                                 </button>
                             </form>

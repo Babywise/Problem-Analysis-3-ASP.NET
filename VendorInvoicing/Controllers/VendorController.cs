@@ -27,9 +27,7 @@ namespace VendorInvoicing.Controllers
                 vendorViewModel = new VendorViewModel()
                 {
                     vendors = _vendorsContext.Vendors
-                    .OrderBy(v => v.Name).ToList(),
-                    startingLetter = "A",
-                    endingLetter = "Z"
+                    .OrderBy(v => v.Name).ToList()
                 };
             }
             return View(vendorViewModel);
@@ -47,8 +45,7 @@ namespace VendorInvoicing.Controllers
 
         public IActionResult Edit(int id)
         {
-            Vendor vendor = _vendorsContext.Vendors
-                .OrderBy(v => v.VendorId == id).FirstOrDefault();
+            Vendor vendor = _vendorsContext.Vendors.Find(id);
             return View(vendor);
         }
     }

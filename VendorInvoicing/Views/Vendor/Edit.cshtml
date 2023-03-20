@@ -33,3 +33,63 @@
         </tbody>
     </table>
 </div>
+<form asp-controller="Vendor" asp-action="Edit" method="post" enctype="application/x-www-form-urlencoded">
+    <!-- placeholder for validn errs if there are any: -->
+    <div class="text-danger" asp-validation-summary="All"></div>
+
+    <!-- We are binding this input field to the Name prop on the Movie object that is our model -->
+    <div class="form-group">
+        <label asp-for="Name">Name</label>
+        <input type="text" asp-for="Name" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Address1">Address 1</label>
+        <input type="text" asp-for="Address1" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Address2">Address 2</label>
+        <input type="text" asp-for="Address2" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="City">Name</label>
+        <input type="text" asp-for="Name" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ProvinceOrState">Province Or State</label>
+        <input type="text" asp-for="ProvinceOrState" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ZipOrPostalCode">Zip Or Postal Code</label>
+        <input type="text" asp-for="ZipOrPostalCode" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="VendorPhone">Vendor Phone</label>
+        <input type="text" asp-for="VendorPhone" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="VendorContactLastName">Vendor Contact Last Name</label>
+        <input type="text" asp-for="VendorContactLastName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="VendorContactFirstName">Vendor Contact First Name</label>
+        <input type="text" asp-for="VendorContactFirstName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="VendorContactEmail">Vendor Contact Email</label>
+        <input type="text" asp-for="VendorContactEmail" class="form-control" />
+    </div>
+
+    <div>
+        <button type="submit" class="btn btn-primary">Add</button>
+        <a asp-controller="Vendor" asp-action="Index" class="btn btn-primary">Cancel</a>
+    </div>
+</form>
