@@ -1,0 +1,128 @@
+﻿@model VendorViewModel
+@{
+    ViewData["Title"] = "List of Vendors";
+    int buttonOffest = 4;
+}
+
+<div class="text-center">
+    <div class="d-flex justify-content-center">
+        <form class="m-1" id="vendorAllRequest" asp-controller="Vendor" asp-action="GetSortedVendorList"
+        asp-route-startingLetter="A" asp-route-endingLetter="Z"
+        method="post" enctype="application/x-www-form-urlencoded">
+            <button class="btn btn-outline-secondary" type="submit" onclick="event.preventDefault(); document.getElementById('vendorAllRequest').submit();">
+                All
+            </button>
+        </form>
+
+        @for (int i = 0; i < 5; i++)
+        {
+            string startingLetter = ((char)((i * buttonOffest) + 65)).ToString();
+            string endingLetter;
+
+            if (i < 5 - 1)
+            {
+                endingLetter = ((char)(((i + 1) * buttonOffest) + 65)).ToString();
+            }
+            else
+            {
+                endingLetter = ((char)90).ToString();
+            }
+
+            <form class="m-1" id="vendorAlphaRequest-@i" asp-controller="Vendor" asp-action="GetSortedVendorList" 
+            asp-route-startingLetter="@startingLetter" asp-route-endingLetter="@endingLetter" 
+            method="post" enctype="application/x-www-form-urlencoded">
+                <button class="btn btn-outline-secondary" type="submit" onclick="event.preventDefault(); document.getElementById('vendorAlphaRequest-@i').submit();">
+                    @startingLetter - @endingLetter
+                </button>
+                
+            </form>
+        }
+        
+        <form class="m-1 bd-highlight" id="vendorAddRequest" asp-controller="Vendor" asp-action="Add">
+            <button class="btn btn-primary" type="submit" onclick="event.preventDefault(); document.getElementById('vendorAddRequest').submit();">
+                Add New Vendor
+            </button>
+        </form>
+    </div>
+    
+</div>
+<div>
+    <table class="table table-hover">
+        <thead>
+            <tr class="text-center">
+                <th scope="col" class="text-nowrap">#</th>
+                <th scope="col" class="text-nowrap">Name</th>
+                <th scope="col" class="text-nowrap">Vendor Contact<br/>Last Name</th>
+                <th scope="col" class="text-nowrap">Vendor Contact<br/>First Name</th>
+                <th scope="col" class="text-nowrap">Vendor Contact Email</th>
+                <th scope="col" class="text-nowrap">Vendor Phone</th>
+                <th scope="col" class="text-nowrap">Edit</th>
+                <th scope="col" class="text-nowrap">Invoices</th>
+                <th scope="col" class="text-nowrap">Delete</th>
+                <th scope="col" class="text-nowrap"></th>
+            </tr>
+        </thead>
+        <tbody>
+        <tbody>
+            @if (Model.vendors != null)
+            {
+                @for(int i = 0; i < Model.vendors.Count; i++)
+                {
+                    
+                    <tr scope="row">
+                        <td>@(i + 1)</td>
+                        <td>@Model.vendors.ElementAt(i).Name</td>
+                        <td class="text-center">@Model.vendors.ElementAt(i).VendorContactLastName</td>
+                        <td class="text-center">@Model.vendors.ElementAt(i).VendorContactFirstName</td>
+                        <td>@Model.vendors.ElementAt(i).VendorContactEmail</td>
+                        <td class="text-nowrap text-center">@Model.vendors.ElementAt(i).VendorPhone</td>
+                        <td class="text-center">
+                            <form id="vendorEditRequest-@i" asp-controller="Vendor" asp-action="Edit" asp-route-id="@Model.vendors.ElementAt(i).VendorId">
+                                <button class="btn btn-outline-primary" type="submit" onclick="event.preventDefault(); document.getElementById('vendorEditRequest-@i').submit();">
+                                    Edit
+                                </button>
+                            </form>
+                        </td>
+                        <td class="text-center">
+                            <form id="vendorInvoicesRequest-@i" asp-controller="Vendor" asp-action="GetInvoicesForVendor" asp-route-id="@Model.vendors.ElementAt(i).VendorId">
+                                <button class="btn btn-primary" type="submit" onclick="event.preventDefault(); document.getElementById('vendorInvoicesRequest-@i').submit();">
+                                    Invoices
+                                </button>
+                            </form>
+                        </td>
+                        <td class="text-center">
+                            @if (Model.vendors.ElementAt(i).IsDeleted)
+                            {
+                                <button class="btn btn-outline-secondary" disabled>
+                                    Delete
+                                </button>
+                            }
+                            else
+                            {
+                                <form id="vendorDeleteRequest-@i" asp-controller="Vendor" asp-action="Delete" asp-route-id="@Model.vendors.ElementAt(i).VendorId">
+                                    <button class="btn btn-outline-danger" type="submit" onclick="event.preventDefault(); document.getElementById('vendorDeleteRequest-@i').submit();">
+                                        Delete
+                                    </button>
+                                </form>
+                            }
+                        </td>
+                        <td>
+                            @if (Model.vendors.ElementAt(i).IsDeleted)
+                            {
+                                <form id="vendorUndoDeleteRequest-@i" asp-controller="Vendor" asp-action="UndoDelete" asp-route-id="@Model.vendors.ElementAt(i).VendorId">
+                                    <button class="btn btn-outline-secondary" type="submit" onclick="event.preventDefault(); document.getElementById('vendorUndoDeleteRequest-@i').submit();">
+                                        Undo
+                                    </button>
+                                </form>
+                            }
+                            else
+                            {
+                                    
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

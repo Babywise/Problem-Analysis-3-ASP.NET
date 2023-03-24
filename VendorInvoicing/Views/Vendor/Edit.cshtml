@@ -3,93 +3,63 @@
     ViewData["Title"] = "Vendor Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Vendors</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col" class="text-nowrap">Name</th>
-                <th scope="col" class="text-nowrap">Vendor Phone</th>
-                <th scope="col" class="text-nowrap">Vendor Contact<br/>Last Name</th>
-                <th scope="col" class="text-nowrap">Vendor Contact<br/>First Name</th>
-                <th scope="col" class="text-nowrap">Vendor Contact Email</th>
-                <th scope="col"><br/></th>
-                <th scope="col"><br/></th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model != null)
-            {
+<div class="text-center vertical-align">
+    <h1 class="display-4">@Model.Name</h1>
 
-                <tr scope="row">
-                    <td>@Model.Name</td>
-                    <td class="text-nowrap">@Model.VendorPhone</td>
-                    <td>@Model.VendorContactLastName</td>
-                    <td>@Model.VendorContactFirstName</td>
-                    <td>@Model.VendorContactEmail</td>
-                </tr>
-                
-            }
-        </tbody>
-    </table>
 </div>
-<form asp-controller="Vendor" asp-action="Edit" method="post" enctype="application/x-www-form-urlencoded">
-    <!-- placeholder for validn errs if there are any: -->
-    <div class="text-danger" asp-validation-summary="All"></div>
+<div class="center">
+    <form asp-controller="Vendor" asp-action="Edit" method="post" enctype="application/x-www-form-urlencoded">
+        <!-- placeholder for validn errs if there are any: -->
+        <div class="text-danger" asp-validation-summary="All"></div>
 
-    <!-- We are binding this input field to the Name prop on the Movie object that is our model -->
-    <div class="form-group">
-        <label asp-for="Name">Name</label>
-        <input type="text" asp-for="Name" class="form-control" />
-    </div>
+        <!-- We are binding this input field to the Name prop on the Movie object that is our model -->
+        <div class="form-group row">
+            <div class="col-sm-3 mx-auto"><label asp-for="Name">Name</label></div>
+            <div class="col-sm-4 mx-auto"><input type="text" asp-for="Name" class="form-control" /></div>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="Address1">Address 1</label>
-        <input type="text" asp-for="Address1" class="form-control" />
-    </div>
+        <div class="form-group row">
+            <div class="col-sm-3 mx-auto"><label asp-for="Address1">Address 1</label></div>
+            <div class="col-sm-4 mx-auto"><input type="text" asp-for="Address1" class="form-control" /></div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-3 mx-auto"><label asp-for="Address2">Address 2</label></div>
+            <div class="col-sm-4 mx-auto"><input type="text" asp-for="Address2" class="form-control" /></div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-3 mx-auto"><label asp-for="City">Name</label></div>
+            <div class="col-sm-4 mx-auto"><input type="text" asp-for="City" class="form-control" /></div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-3 mx-auto"><label asp-for="ProvinceOrState">Province Or State</label></div>
+            <div class="col-sm-4 mx-auto"><input type="text" asp-for="ProvinceOrState" class="form-control" /></div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-3 mx-auto"><label asp-for="ZipOrPostalCode">Zip Or Postal Code</label></div>
+            <div class="col-sm-4 mx-auto"><input type="text" asp-for="ZipOrPostalCode" class="form-control" /></div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-3 mx-auto"><label asp-for="VendorPhone">Vendor Phone</label></div>
+            <div class="col-sm-4 mx-auto"><input type="text" asp-for="VendorPhone" class="form-control" /></div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-3 mx-auto"><label asp-for="VendorContactLastName">Vendor Contact Last Name</label></div>
+            <div class="col-sm-4 mx-auto"><input type="text" asp-for="VendorContactLastName" class="form-control" /></div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-3 mx-auto"><label asp-for="VendorContactFirstName">Vendor Contact First Name</label></div>
+            <div class="col-sm-4 mx-auto"><input type="text" asp-for="VendorContactFirstName" class="form-control" /></div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-3 mx-auto"><label asp-for="VendorContactEmail">Vendor Contact Email</label></div>
+            <div class="col-sm-4 mx-auto"><input type="text" asp-for="VendorContactEmail" class="form-control" /></div>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="Address2">Address 2</label>
-        <input type="text" asp-for="Address2" class="form-control" />
-    </div>
-
-    <div class="form-group">
-        <label asp-for="City">Name</label>
-        <input type="text" asp-for="Name" class="form-control" />
-    </div>
-
-    <div class="form-group">
-        <label asp-for="ProvinceOrState">Province Or State</label>
-        <input type="text" asp-for="ProvinceOrState" class="form-control" />
-    </div>
-
-    <div class="form-group">
-        <label asp-for="ZipOrPostalCode">Zip Or Postal Code</label>
-        <input type="text" asp-for="ZipOrPostalCode" class="form-control" />
-    </div>
-
-    <div class="form-group">
-        <label asp-for="VendorPhone">Vendor Phone</label>
-        <input type="text" asp-for="VendorPhone" class="form-control" />
-    </div>
-
-    <div class="form-group">
-        <label asp-for="VendorContactLastName">Vendor Contact Last Name</label>
-        <input type="text" asp-for="VendorContactLastName" class="form-control" />
-    </div>
-
-    <div class="form-group">
-        <label asp-for="VendorContactFirstName">Vendor Contact First Name</label>
-        <input type="text" asp-for="VendorContactFirstName" class="form-control" />
-    </div>
-
-    <div class="form-group">
-        <label asp-for="VendorContactEmail">Vendor Contact Email</label>
-        <input type="text" asp-for="VendorContactEmail" class="form-control" />
-    </div>
-
-    <div>
-        <button type="submit" class="btn btn-primary">Add</button>
-        <a asp-controller="Vendor" asp-action="Index" class="btn btn-primary">Cancel</a>
-    </div>
-</form>
+        <div class="d-flex">
+            <div class="col-sm-3 mx-auto"> 
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <a asp-controller="Vendor" asp-action="Index" class="btn btn-primary">Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>

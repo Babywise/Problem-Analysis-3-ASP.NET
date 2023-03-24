@@ -26,6 +26,7 @@
 
         public bool IsDeleted { get; set; } = false;
 
-		// Nav to all Invoices:
+        // Nav to all Invoices:
+        public List<Invoice>? Invoices { get; set; }
     }
 }

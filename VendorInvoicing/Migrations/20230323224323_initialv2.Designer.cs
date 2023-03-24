@@ -12,8 +12,8 @@ using VendorInvoicing.Entities;
 namespace VendorInvoicing.Migrations
 {
     [DbContext(typeof(VendorsContext))]
-    [Migration("20230320041554_vendordbset")]
-    partial class vendordbset
+    [Migration("20230323224323_initialv2")]
+    partial class initialv2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

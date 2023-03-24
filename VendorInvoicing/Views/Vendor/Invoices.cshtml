@@ -1,0 +1,94 @@
+﻿@model Vendor
+@{
+    ViewData["Title"] = $"Invoices for {Model.Name}";
+}
+<div class="container">
+
+    <div class="d-flex p-1">
+        <div class="flex-fill p-2">
+            <h2 class="float-end"><b><a asp-controller="Vendor" asp-action="GetVendorList">Return to Vendor List</a></b></h2>
+        </div>
+    </div>
+    <div class="d-flex p-1">
+        <div class="flex-fill p-2 flex-column">
+            <div class="p-2 float-start"><h2>Address: @Model.Address1 @Model.Address2</h2></div>
+            <div class="p-2 float-end"><h2><b>Terms: </b>X Days</h2></div>
+        </div>
+    </div>
+    </br>
+    </br>
+    <div class="d-flex p-1">
+        <div class="flex-fill p-2 flex-column float-start">
+            <h4><b>Invoices</b></h4>
+            <table style="width:100%; border: 1px solid black; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th class="text-center" style="border: 1px solid black; border-collapse: collapse;">Invoice #</th>
+                        <th class="text-center" style="border: 1px solid black; border-collapse: collapse;">Due date</th>
+                        <th class="text-center" style="border: 1px solid black; border-collapse: collapse;">Amount paid</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            </br>
+            <form>
+                <div class="form-group row p-2">
+                    <div class="col-sm-2 me-auto"><h4><b><label @*asp-for="Date"*@>Date: </label></b></h4></div>
+                    <div class="col-sm-8 ms-auto"><input type="text" @*asp-for="Date"*@ class="form-control" /></div>
+                </div>
+                @*<div class="form-group">
+                    <select asp-for="Invoice" class="form-control">
+                        <option value="">Please select a genre</option>
+                        @foreach (var g in Model.Genres)
+                        {
+                            <option value="@g.GenreId">@g.Name</option>
+                        }
+                    </select>
+                </div>*@
+                <div class="form-group row p-2">
+                    <div class="col-sm-2 me-auto"><h4><b><label @*asp-for="Terms"*@>Terms: </label></b></h4></div>
+                    <div class="col-sm-8 ms-auto"><input type="text" @*asp-for="Terms"*@ class="form-control" /></div>
+                </div>
+                <a asp-controller="Vendor" asp-action="Index" class="btn btn-primary btn-lg">Add Invoice</a>
+            </form>
+        </div>
+        <div class="flex-fill p-2 flex-column float-start">
+            <h4><b>Line items for invoice #</b></h4>
+            <table style="width:100%; border: 1px solid black; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th class="text-center" style="border: 1px solid black; border-collapse: collapse;">Description</th>
+                        <th class="text-center" style="border: 1px solid black; border-collapse: collapse;">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            </br>
+            <form>
+                <div class="form-group row p-2">
+                    <div class="col-sm-2 me-auto"><h4><b>Total: </b></h4></div>
+                    <div class="col-sm-8 ms-auto"><h4><b>$123123: </b></h4></div>
+                </div>
+                <div class="form-group row p-2">
+                    <div class="col-sm-2 me-auto"><h4><b><label @*asp-for="Description"*@>Description: </label></b></h4></div>
+                    <div class="col-sm-8 ms-auto"><input type="text" @*asp-for="Description"*@ class="form-control" /></div>
+                </div>
+                <div class="form-group row p-2">
+                    <div class="col-sm-2 me-auto"><h4><b><label @*asp-for="Amount"*@>Amount: </label></b></h4></div>
+                    <div class="col-sm-8 ms-auto"><input type="text" @*asp-for="Amount"*@ class="form-control" /></div>
+                </div>
+                <a asp-controller="Vendor" asp-action="Index" class="btn btn-primary btn-lg">Add line item</a>
+            </form>
+        </div>
+    </div>
+    <div class="d-flex p-1">
+        <div class="flex-fill p-2 flex-column float-start">
+            
+        </div>
+        <div class="flex-fill p-2 flex-column float-start">
+
+        </div>
+    </div>
+</div>

@@ -197,6 +197,246 @@
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
     },
     {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\assets\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\assets\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\assets\\css\\docs.css",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\assets\\css\\docs.css"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\assets\\css\\font-awesome-ie7.min.css",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\assets\\css\\font-awesome-ie7.min.css"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\assets\\css\\font-awesome.min.css",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\assets\\css\\font-awesome.min.css"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\assets\\css\\font\\FontAwesome.otf",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\assets\\css\\font\\FontAwesome.otf"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\assets\\css\\font\\fontawesome-webfont.eot",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\assets\\css\\font\\fontawesome-webfont.eot"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\assets\\css\\font\\fontawesome-webfont.svg",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\assets\\css\\font\\fontawesome-webfont.svg"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\assets\\css\\font\\fontawesome-webfont.ttf",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\assets\\css\\font\\fontawesome-webfont.ttf"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\assets\\css\\font\\fontawesome-webfont.woff",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\assets\\css\\font\\fontawesome-webfont.woff"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\assets\\ico\\apple-touch-icon-114-precomposed.png",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\assets\\ico\\apple-touch-icon-114-precomposed.png"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\assets\\ico\\apple-touch-icon-144-precomposed.png",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\assets\\ico\\apple-touch-icon-144-precomposed.png"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\assets\\ico\\apple-touch-icon-57-precomposed.png",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\assets\\ico\\apple-touch-icon-57-precomposed.png"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\assets\\ico\\apple-touch-icon-72-precomposed.png",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\assets\\ico\\apple-touch-icon-72-precomposed.png"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\assets\\ico\\favicon.png",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\assets\\ico\\favicon.png"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\assets\\img\\bs-docs-masthead-pattern.png",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\assets\\img\\bs-docs-masthead-pattern.png"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\assets\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\assets\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\assets\\js\\demo.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\assets\\js\\demo.js"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\assets\\js\\docs.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\assets\\js\\docs.js"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\assets\\js\\google-code-prettify\\prettify.css",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\assets\\js\\google-code-prettify\\prettify.css"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\assets\\js\\google-code-prettify\\prettify.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\assets\\js\\google-code-prettify\\prettify.js"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\assets\\js\\jquery-1.8.3.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\assets\\js\\jquery-1.8.3.min.js"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\assets\\js\\jquery-1.9.0.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\assets\\js\\jquery-1.9.0.min.js"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\assets\\js\\jquery-ui-1.10.0.custom.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\assets\\js\\jquery-ui-1.10.0.custom.min.js"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\images\\ui-bg_flat_0_aaaaaa_40x100.png",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\images\\ui-bg_flat_0_aaaaaa_40x100.png"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\images\\ui-bg_glass_55_fbf9ee_1x400.png",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\images\\ui-bg_glass_55_fbf9ee_1x400.png"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\images\\ui-bg_glass_65_ffffff_1x400.png",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\images\\ui-bg_glass_65_ffffff_1x400.png"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\images\\ui-bg_glass_75_dadada_1x400.png",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\images\\ui-bg_glass_75_dadada_1x400.png"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\images\\ui-bg_glass_75_e6e6e6_1x400.png",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\images\\ui-bg_glass_75_e6e6e6_1x400.png"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\images\\ui-bg_glass_75_ffffff_1x400.png",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\images\\ui-bg_glass_75_ffffff_1x400.png"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\images\\ui-bg_highlight-soft_75_cccccc_1x100.png",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\images\\ui-bg_highlight-soft_75_cccccc_1x100.png"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\images\\ui-bg_inset-soft_95_fef1ec_1x100.png",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\images\\ui-bg_inset-soft_95_fef1ec_1x100.png"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\images\\ui-icons_222222_256x240.png",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\images\\ui-icons_222222_256x240.png"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\images\\ui-icons_2e83ff_256x240.png",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\images\\ui-icons_2e83ff_256x240.png"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\images\\ui-icons_454545_256x240.png",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\images\\ui-icons_454545_256x240.png"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\images\\ui-icons_888888_256x240.png",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\images\\ui-icons_888888_256x240.png"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\images\\ui-icons_cd0a0a_256x240.png",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\images\\ui-icons_cd0a0a_256x240.png"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\images\\ui-icons_f6cf3b_256x240.png",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\images\\ui-icons_f6cf3b_256x240.png"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\jquery-ui-1.10.0.custom.css",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\jquery-ui-1.10.0.custom.css"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\jquery-ui-1.9.2.custom.css",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\jquery-ui-1.9.2.custom.css"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\jquery.ui.1.10.0.ie.css",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\jquery.ui.1.10.0.ie.css"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\jquery.ui.1.9.2.ie.css",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\css\\custom-theme\\jquery.ui.1.9.2.ie.css"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\css\\demo.css",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\css\\demo.css"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\js\\demo.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\js\\demo.js"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\js\\jquery-1.8.3.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\js\\jquery-1.8.3.min.js"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\js\\jquery-ui-1.9.2.custom.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\js\\jquery-ui-1.9.2.custom.min.js"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\third-party\\jQuery-UI-Date-Range-Picker\\css\\ui.daterangepicker.css",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\third-party\\jQuery-UI-Date-Range-Picker\\css\\ui.daterangepicker.css"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\third-party\\jQuery-UI-Date-Range-Picker\\js\\date.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\third-party\\jQuery-UI-Date-Range-Picker\\js\\date.js"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\third-party\\jQuery-UI-Date-Range-Picker\\js\\daterangepicker.jQuery.compressed.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\third-party\\jQuery-UI-Date-Range-Picker\\js\\daterangepicker.jQuery.compressed.js"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\third-party\\jQuery-UI-Date-Range-Picker\\js\\daterangepicker.jQuery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\third-party\\jQuery-UI-Date-Range-Picker\\js\\daterangepicker.jQuery.js"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\third-party\\jQuery-UI-FileInput\\css\\enhanced.css",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\third-party\\jQuery-UI-FileInput\\css\\enhanced.css"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\third-party\\jQuery-UI-FileInput\\images\\icon-generic.gif",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\third-party\\jQuery-UI-FileInput\\images\\icon-generic.gif"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\third-party\\jQuery-UI-FileInput\\images\\icon-image.gif",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\third-party\\jQuery-UI-FileInput\\images\\icon-image.gif"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\third-party\\jQuery-UI-FileInput\\images\\icon-media.gif",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\third-party\\jQuery-UI-FileInput\\images\\icon-media.gif"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\third-party\\jQuery-UI-FileInput\\images\\icon-zip.gif",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\third-party\\jQuery-UI-FileInput\\images\\icon-zip.gif"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\third-party\\jQuery-UI-FileInput\\js\\enhance.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\third-party\\jQuery-UI-FileInput\\js\\enhance.min.js"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\third-party\\jQuery-UI-FileInput\\js\\fileinput.jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\third-party\\jQuery-UI-FileInput\\js\\fileinput.jquery.js"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\third-party\\wijmo\\jquery.bgiframe-2.1.3-pre.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\third-party\\wijmo\\jquery.bgiframe-2.1.3-pre.js"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\third-party\\wijmo\\jquery.mousewheel.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\third-party\\wijmo\\jquery.mousewheel.min.js"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\third-party\\wijmo\\jquery.wijmo-open.1.5.0.css",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\third-party\\wijmo\\jquery.wijmo-open.1.5.0.css"
+    },
+    {
+      "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-ui-bootstrap\\third-party\\wijmo\\jquery.wijmo-open.1.5.0.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-bootstrap\\third-party\\wijmo\\jquery.wijmo-open.1.5.0.min.js"
+    },
+    {
       "Id": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },

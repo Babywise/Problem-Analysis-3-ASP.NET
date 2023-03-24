@@ -8,26 +8,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace VendorInvoicing.Migrations
 {
     /// <inheritdoc />
-    public partial class inital : Migration
+    public partial class initialv2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "InvoiceLineItem",
-                columns: table => new
-                {
-                    InvoiceLineItemId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Amount = table.Column<double>(type: "float", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    InvoiceId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_InvoiceLineItem", x => x.InvoiceLineItemId);
-                });
-
             migrationBuilder.CreateTable(
                 name: "PaymentTerms",
                 columns: table => new
@@ -43,7 +28,7 @@ namespace VendorInvoicing.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Vendor",
+                name: "Vendors",
                 columns: table => new
                 {
                     VendorId = table.Column<int>(type: "int", nullable: false)
@@ -62,7 +47,7 @@ namespace VendorInvoicing.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Vendor", x => x.VendorId);
+                    table.PrimaryKey("PK_Vendors", x => x.VendorId);
                 });
 
             migrationBuilder.CreateTable(
@@ -86,35 +71,32 @@ namespace VendorInvoicing.Migrations
                         principalTable: "PaymentTerms",
                         principalColumn: "PaymentTermsId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Invoice_Vendors_VendorId",
+                        column: x => x.VendorId,
+                        principalTable: "Vendors",
+                        principalColumn: "VendorId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.InsertData(
-                table: "InvoiceLineItem",
-                columns: new[] { "InvoiceLineItemId", "Amount", "Description", "InvoiceId" },
-                values: new object[,]
+            migrationBuilder.CreateTable(
+                name: "InvoiceLineItem",
+                columns: table => new
                 {
-                    { 1, 1089.99, "Part 123", 1 },
-                    { 2, 173499.5, "Service XYZ", 1 },
-                    { 3, 4654499.5, "Part 110", 2 },
-                    { 4, 78799.5, "Part A", 2 },
-                    { 5, 679.5, "Part AA", 3 },
-                    { 6, 786.89999999999998, "Part Z", 3 },
-                    { 7, 998.5, "Trip 1", 4 },
-                    { 8, 1011.5, "Service XYZ", 4 },
-                    { 9, 565735.5, "Rental DEF", 5 },
-                    { 10, 5753.5, "Rental ZZZ", 5 },
-                    { 11, 58453.900000000001, "Service ABC", 6 },
-                    { 12, 111232.5, "Service ABC", 6 },
-                    { 13, 109.5, "Rental ABC", 7 },
-                    { 14, 57846.5, "Rental ABC", 8 },
-                    { 15, 132.5, "Trip 2", 9 },
-                    { 16, 6877.8999999999996, "Service XYZ", 9 },
-                    { 17, 8999.5, "Trip 3", 10 },
-                    { 18, 1033.5, "Blah blah", 10 },
-                    { 19, 56455.5, "Ho hum", 11 },
-                    { 20, 1454589.5, "Fiddle dee", 11 },
-                    { 21, 583453.5, "Service ABC", 12 },
-                    { 22, 567.5, "Fiddle dum", 12 }
+                    InvoiceLineItemId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Amount = table.Column<double>(type: "float", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    InvoiceId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InvoiceLineItem", x => x.InvoiceLineItemId);
+                    table.ForeignKey(
+                        name: "FK_InvoiceLineItem_Invoice_InvoiceId",
+                        column: x => x.InvoiceId,
+                        principalTable: "Invoice",
+                        principalColumn: "InvoiceId");
                 });
 
             migrationBuilder.InsertData(
@@ -130,7 +112,7 @@ namespace VendorInvoicing.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Vendor",
+                table: "Vendors",
                 columns: new[] { "VendorId", "Address1", "Address2", "City", "IsDeleted", "Name", "ProvinceOrState", "VendorContactEmail", "VendorContactFirstName", "VendorContactLastName", "VendorPhone", "ZipOrPostalCode" },
                 values: new object[,]
                 {
@@ -163,26 +145,65 @@ namespace VendorInvoicing.Migrations
                     { 12, new DateTime(2022, 12, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 0.0, 8 }
                 });
 
+            migrationBuilder.InsertData(
+                table: "InvoiceLineItem",
+                columns: new[] { "InvoiceLineItemId", "Amount", "Description", "InvoiceId" },
+                values: new object[,]
+                {
+                    { 1, 1089.99, "Part 123", 1 },
+                    { 2, 173499.5, "Service XYZ", 1 },
+                    { 3, 4654499.5, "Part 110", 2 },
+                    { 4, 78799.5, "Part A", 2 },
+                    { 5, 679.5, "Part AA", 3 },
+                    { 6, 786.89999999999998, "Part Z", 3 },
+                    { 7, 998.5, "Trip 1", 4 },
+                    { 8, 1011.5, "Service XYZ", 4 },
+                    { 9, 565735.5, "Rental DEF", 5 },
+                    { 10, 5753.5, "Rental ZZZ", 5 },
+                    { 11, 58453.900000000001, "Service ABC", 6 },
+                    { 12, 111232.5, "Service ABC", 6 },
+                    { 13, 109.5, "Rental ABC", 7 },
+                    { 14, 57846.5, "Rental ABC", 8 },
+                    { 15, 132.5, "Trip 2", 9 },
+                    { 16, 6877.8999999999996, "Service XYZ", 9 },
+                    { 17, 8999.5, "Trip 3", 10 },
+                    { 18, 1033.5, "Blah blah", 10 },
+                    { 19, 56455.5, "Ho hum", 11 },
+                    { 20, 1454589.5, "Fiddle dee", 11 },
+                    { 21, 583453.5, "Service ABC", 12 },
+                    { 22, 567.5, "Fiddle dum", 12 }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Invoice_PaymentTermsId",
                 table: "Invoice",
                 column: "PaymentTermsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Invoice_VendorId",
+                table: "Invoice",
+                column: "VendorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InvoiceLineItem_InvoiceId",
+                table: "InvoiceLineItem",
+                column: "InvoiceId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Invoice");
-
-            migrationBuilder.DropTable(
                 name: "InvoiceLineItem");
 
             migrationBuilder.DropTable(
-                name: "Vendor");
+                name: "Invoice");
 
             migrationBuilder.DropTable(
                 name: "PaymentTerms");
+
+            migrationBuilder.DropTable(
+                name: "Vendors");
         }
     }
 }

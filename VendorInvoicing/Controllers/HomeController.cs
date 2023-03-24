@@ -15,7 +15,7 @@ namespace VendorInvoicing.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("GetVendorList", "Vendor");
         }
 
         public IActionResult Privacy()

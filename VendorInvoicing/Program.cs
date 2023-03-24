@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using VendorInvoicing.Entities;
+using VendorInvoicing.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,7 @@ string connStr = builder.Configuration.GetConnectionString("VendorsDB");
 // and then use that conn'n string as we add our DB context to the
 // DI container's services, specifying that we are using SQL server:
 builder.Services.AddDbContext<VendorsContext>(options => options.UseSqlServer(connStr));
+builder.Services.AddScoped<IVendorInvoicingService, DbVendorInvoicingService>();
 
 var app = builder.Build();
 

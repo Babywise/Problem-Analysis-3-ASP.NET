@@ -36,8 +36,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVuZG9yXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Coding/ASP.NET/Problem Analysis 3/VendorInvoicing/Views/Vendor/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVuZG9yXEluZGV4LmNzaHRtbA==
+[E:/Coding/ASP.NET/Problem Analysis 3/VendorInvoicing/Views/Vendor/Invoices.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVuZG9yXEludm9pY2VzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Coding/ASP.NET/Problem Analysis 3/VendorInvoicing/Views/Vendor/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVuZG9yXExpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/Coding/ASP.NET/Problem Analysis 3/VendorInvoicing/Views/_ViewImports.cshtml]
