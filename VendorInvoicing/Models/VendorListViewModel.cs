@@ -3,12 +3,10 @@ using VendorInvoicing.Entities;
 
 namespace VendorInvoicing.Models
 {
-    public class VendorViewModel
+    public class VendorListViewModel
     {
-        public List<Vendor> vendors { get; set; }
-        [BindProperty(Name = "startingLetter")]
+        public ICollection<Vendor> vendors { get; set; }
         public string? startingLetter { get; set; }
-        [BindProperty(Name = "endingLetter")]
         public string? endingLetter { get; set; }
     }
 }

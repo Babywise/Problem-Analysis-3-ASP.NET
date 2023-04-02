@@ -12,8 +12,8 @@ using VendorInvoicing.Entities;
 namespace VendorInvoicing.Migrations
 {
     [DbContext(typeof(VendorsContext))]
-    [Migration("20230323224323_initialv2")]
-    partial class initialv2
+    [Migration("20230325044053_trypaymentlistv8")]
+    partial class trypaymentlistv8
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,6 +25,21 @@ namespace VendorInvoicing.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("InvoicePaymentTerms", b =>
+                {
+                    b.Property<int>("InvoicesInvoiceId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PaymentTermsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("InvoicesInvoiceId", "PaymentTermsId");
+
+                    b.HasIndex("PaymentTermsId");
+
+                    b.ToTable("InvoicePaymentTerms", (string)null);
+                });
+
             modelBuilder.Entity("VendorInvoicing.Entities.Invoice", b =>
                 {
                     b.Property<int>("InvoiceId")
@@ -32,6 +47,9 @@ namespace VendorInvoicing.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InvoiceId"));
+
+                    b.Property<double?>("AmountPaid")
+                        .HasColumnType("float");
 
                     b.Property<DateTime?>("InvoiceDate")
                         .HasColumnType("datetime2");
@@ -50,16 +68,15 @@ namespace VendorInvoicing.Migrations
 
                     b.HasKey("InvoiceId");
 
-                    b.HasIndex("PaymentTermsId");
-
                     b.HasIndex("VendorId");
 
-                    b.ToTable("Invoice");
+                    b.ToTable("Invoices");
 
                     b.HasData(
                         new
                         {
                             InvoiceId = 1,
+                            AmountPaid = 10.0,
                             InvoiceDate = new DateTime(2022, 8, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentTermsId = 3,
                             PaymentTotal = 0.0,
@@ -68,6 +85,7 @@ namespace VendorInvoicing.Migrations
                         new
                         {
                             InvoiceId = 2,
+                            AmountPaid = 0.0,
                             InvoiceDate = new DateTime(2022, 8, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentTermsId = 3,
                             PaymentTotal = 0.0,
@@ -76,6 +94,7 @@ namespace VendorInvoicing.Migrations
                         new
                         {
                             InvoiceId = 3,
+                            AmountPaid = 7.0,
                             InvoiceDate = new DateTime(2022, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentTermsId = 3,
                             PaymentTotal = 0.0,
@@ -84,6 +103,7 @@ namespace VendorInvoicing.Migrations
                         new
                         {
                             InvoiceId = 4,
+                            AmountPaid = 0.0,
                             InvoiceDate = new DateTime(2022, 9, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentTermsId = 4,
                             PaymentTotal = 0.0,
@@ -92,6 +112,7 @@ namespace VendorInvoicing.Migrations
                         new
                         {
                             InvoiceId = 5,
+                            AmountPaid = 11.0,
                             InvoiceDate = new DateTime(2022, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentTermsId = 3,
                             PaymentTotal = 0.0,
@@ -100,6 +121,7 @@ namespace VendorInvoicing.Migrations
                         new
                         {
                             InvoiceId = 6,
+                            AmountPaid = 0.0,
                             InvoiceDate = new DateTime(2022, 10, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentTermsId = 4,
                             PaymentTotal = 0.0,
@@ -108,6 +130,7 @@ namespace VendorInvoicing.Migrations
                         new
                         {
                             InvoiceId = 7,
+                            AmountPaid = 13.0,
                             InvoiceDate = new DateTime(2022, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentTermsId = 3,
                             PaymentTotal = 0.0,
@@ -116,6 +139,7 @@ namespace VendorInvoicing.Migrations
                         new
                         {
                             InvoiceId = 8,
+                            AmountPaid = 0.0,
                             InvoiceDate = new DateTime(2022, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentTermsId = 5,
                             PaymentTotal = 0.0,
@@ -124,6 +148,7 @@ namespace VendorInvoicing.Migrations
                         new
                         {
                             InvoiceId = 9,
+                            AmountPaid = 10.0,
                             InvoiceDate = new DateTime(2022, 11, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentTermsId = 3,
                             PaymentTotal = 0.0,
@@ -132,6 +157,7 @@ namespace VendorInvoicing.Migrations
                         new
                         {
                             InvoiceId = 10,
+                            AmountPaid = 6.0,
                             InvoiceDate = new DateTime(2022, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentTermsId = 3,
                             PaymentTotal = 0.0,
@@ -140,6 +166,7 @@ namespace VendorInvoicing.Migrations
                         new
                         {
                             InvoiceId = 11,
+                            AmountPaid = 2.0,
                             InvoiceDate = new DateTime(2022, 12, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentTermsId = 2,
                             PaymentTotal = 0.0,
@@ -148,6 +175,7 @@ namespace VendorInvoicing.Migrations
                         new
                         {
                             InvoiceId = 12,
+                            AmountPaid = 5.0,
                             InvoiceDate = new DateTime(2022, 12, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentTermsId = 3,
                             PaymentTotal = 0.0,
@@ -176,7 +204,7 @@ namespace VendorInvoicing.Migrations
 
                     b.HasIndex("InvoiceId");
 
-                    b.ToTable("InvoiceLineItem");
+                    b.ToTable("InvoiceLineItems");
 
                     b.HasData(
                         new
@@ -546,21 +574,28 @@ namespace VendorInvoicing.Migrations
                         });
                 });
 
-            modelBuilder.Entity("VendorInvoicing.Entities.Invoice", b =>
+            modelBuilder.Entity("InvoicePaymentTerms", b =>
                 {
-                    b.HasOne("VendorInvoicing.Entities.PaymentTerms", "PaymentTerms")
+                    b.HasOne("VendorInvoicing.Entities.Invoice", null)
+                        .WithMany()
+                        .HasForeignKey("InvoicesInvoiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VendorInvoicing.Entities.PaymentTerms", null)
                         .WithMany()
                         .HasForeignKey("PaymentTermsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
 
+            modelBuilder.Entity("VendorInvoicing.Entities.Invoice", b =>
+                {
                     b.HasOne("VendorInvoicing.Entities.Vendor", "Vendor")
-                        .WithMany()
+                        .WithMany("Invoices")
                         .HasForeignKey("VendorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("PaymentTerms");
 
                     b.Navigation("Vendor");
                 });
@@ -577,6 +612,11 @@ namespace VendorInvoicing.Migrations
             modelBuilder.Entity("VendorInvoicing.Entities.Invoice", b =>
                 {
                     b.Navigation("InvoiceLineItems");
+                });
+
+            modelBuilder.Entity("VendorInvoicing.Entities.Vendor", b =>
+                {
+                    b.Navigation("Invoices");
                 });
 #pragma warning restore 612, 618
         }

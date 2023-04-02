@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VendorInvoicing.Entities;
 
@@ -11,9 +12,11 @@ using VendorInvoicing.Entities;
 namespace VendorInvoicing.Migrations
 {
     [DbContext(typeof(VendorsContext))]
-    partial class VendorsContextModelSnapshot : ModelSnapshot
+    [Migration("20230325045906_trypaymentlistv9")]
+    partial class trypaymentlistv9
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,6 +45,9 @@ namespace VendorInvoicing.Migrations
                     b.Property<int>("PaymentTermsId")
                         .HasColumnType("int");
 
+                    b.Property<double?>("PaymentTotal")
+                        .HasColumnType("float");
+
                     b.Property<int>("VendorId")
                         .HasColumnType("int");
 
@@ -58,6 +64,7 @@ namespace VendorInvoicing.Migrations
                             AmountPaid = 10.0,
                             InvoiceDate = new DateTime(2022, 8, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentTermsId = 3,
+                            PaymentTotal = 0.0,
                             VendorId = 1
                         },
                         new
@@ -66,6 +73,7 @@ namespace VendorInvoicing.Migrations
                             AmountPaid = 0.0,
                             InvoiceDate = new DateTime(2022, 8, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentTermsId = 3,
+                            PaymentTotal = 0.0,
                             VendorId = 1
                         },
                         new
@@ -74,6 +82,7 @@ namespace VendorInvoicing.Migrations
                             AmountPaid = 7.0,
                             InvoiceDate = new DateTime(2022, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentTermsId = 3,
+                            PaymentTotal = 0.0,
                             VendorId = 2
                         },
                         new
@@ -82,6 +91,7 @@ namespace VendorInvoicing.Migrations
                             AmountPaid = 0.0,
                             InvoiceDate = new DateTime(2022, 9, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentTermsId = 4,
+                            PaymentTotal = 0.0,
                             VendorId = 2
                         },
                         new
@@ -90,6 +100,7 @@ namespace VendorInvoicing.Migrations
                             AmountPaid = 11.0,
                             InvoiceDate = new DateTime(2022, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentTermsId = 3,
+                            PaymentTotal = 0.0,
                             VendorId = 3
                         },
                         new
@@ -98,6 +109,7 @@ namespace VendorInvoicing.Migrations
                             AmountPaid = 0.0,
                             InvoiceDate = new DateTime(2022, 10, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentTermsId = 4,
+                            PaymentTotal = 0.0,
                             VendorId = 3
                         },
                         new
@@ -106,6 +118,7 @@ namespace VendorInvoicing.Migrations
                             AmountPaid = 13.0,
                             InvoiceDate = new DateTime(2022, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentTermsId = 3,
+                            PaymentTotal = 0.0,
                             VendorId = 4
                         },
                         new
@@ -114,6 +127,7 @@ namespace VendorInvoicing.Migrations
                             AmountPaid = 0.0,
                             InvoiceDate = new DateTime(2022, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentTermsId = 5,
+                            PaymentTotal = 0.0,
                             VendorId = 4
                         },
                         new
@@ -122,6 +136,7 @@ namespace VendorInvoicing.Migrations
                             AmountPaid = 10.0,
                             InvoiceDate = new DateTime(2022, 11, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentTermsId = 3,
+                            PaymentTotal = 0.0,
                             VendorId = 5
                         },
                         new
@@ -130,6 +145,7 @@ namespace VendorInvoicing.Migrations
                             AmountPaid = 6.0,
                             InvoiceDate = new DateTime(2022, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentTermsId = 3,
+                            PaymentTotal = 0.0,
                             VendorId = 6
                         },
                         new
@@ -138,6 +154,7 @@ namespace VendorInvoicing.Migrations
                             AmountPaid = 2.0,
                             InvoiceDate = new DateTime(2022, 12, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentTermsId = 2,
+                            PaymentTotal = 0.0,
                             VendorId = 7
                         },
                         new
@@ -146,6 +163,7 @@ namespace VendorInvoicing.Migrations
                             AmountPaid = 5.0,
                             InvoiceDate = new DateTime(2022, 12, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentTermsId = 3,
+                            PaymentTotal = 0.0,
                             VendorId = 8
                         });
                 });
@@ -396,14 +414,12 @@ namespace VendorInvoicing.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VendorId"));
 
                     b.Property<string>("Address1")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Address2")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
@@ -414,27 +430,21 @@ namespace VendorInvoicing.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProvinceOrState")
-                        .IsRequired()
-                        .HasMaxLength(2)
-                        .HasColumnType("nvarchar(2)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("VendorContactEmail")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("VendorContactFirstName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("VendorContactLastName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("VendorPhone")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ZipOrPostalCode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("VendorId");

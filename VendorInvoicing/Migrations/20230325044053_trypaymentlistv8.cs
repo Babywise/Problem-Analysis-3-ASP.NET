@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace VendorInvoicing.Migrations
 {
     /// <inheritdoc />
-    public partial class initialv2 : Migration
+    public partial class trypaymentlistv8 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -51,7 +51,7 @@ namespace VendorInvoicing.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Invoice",
+                name: "Invoices",
                 columns: table => new
                 {
                     InvoiceId = table.Column<int>(type: "int", nullable: false)
@@ -60,19 +60,14 @@ namespace VendorInvoicing.Migrations
                     PaymentTotal = table.Column<double>(type: "float", nullable: true),
                     PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     PaymentTermsId = table.Column<int>(type: "int", nullable: false),
-                    VendorId = table.Column<int>(type: "int", nullable: false)
+                    VendorId = table.Column<int>(type: "int", nullable: false),
+                    AmountPaid = table.Column<double>(type: "float", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Invoice", x => x.InvoiceId);
+                    table.PrimaryKey("PK_Invoices", x => x.InvoiceId);
                     table.ForeignKey(
-                        name: "FK_Invoice_PaymentTerms_PaymentTermsId",
-                        column: x => x.PaymentTermsId,
-                        principalTable: "PaymentTerms",
-                        principalColumn: "PaymentTermsId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Invoice_Vendors_VendorId",
+                        name: "FK_Invoices_Vendors_VendorId",
                         column: x => x.VendorId,
                         principalTable: "Vendors",
                         principalColumn: "VendorId",
@@ -80,7 +75,7 @@ namespace VendorInvoicing.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "InvoiceLineItem",
+                name: "InvoiceLineItems",
                 columns: table => new
                 {
                     InvoiceLineItemId = table.Column<int>(type: "int", nullable: false)
@@ -91,12 +86,36 @@ namespace VendorInvoicing.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_InvoiceLineItem", x => x.InvoiceLineItemId);
+                    table.PrimaryKey("PK_InvoiceLineItems", x => x.InvoiceLineItemId);
                     table.ForeignKey(
-                        name: "FK_InvoiceLineItem_Invoice_InvoiceId",
+                        name: "FK_InvoiceLineItems_Invoices_InvoiceId",
                         column: x => x.InvoiceId,
-                        principalTable: "Invoice",
+                        principalTable: "Invoices",
                         principalColumn: "InvoiceId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "InvoicePaymentTerms",
+                columns: table => new
+                {
+                    InvoicesInvoiceId = table.Column<int>(type: "int", nullable: false),
+                    PaymentTermsId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InvoicePaymentTerms", x => new { x.InvoicesInvoiceId, x.PaymentTermsId });
+                    table.ForeignKey(
+                        name: "FK_InvoicePaymentTerms_Invoices_InvoicesInvoiceId",
+                        column: x => x.InvoicesInvoiceId,
+                        principalTable: "Invoices",
+                        principalColumn: "InvoiceId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_InvoicePaymentTerms_PaymentTerms_PaymentTermsId",
+                        column: x => x.PaymentTermsId,
+                        principalTable: "PaymentTerms",
+                        principalColumn: "PaymentTermsId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -127,26 +146,26 @@ namespace VendorInvoicing.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Invoice",
-                columns: new[] { "InvoiceId", "InvoiceDate", "PaymentDate", "PaymentTermsId", "PaymentTotal", "VendorId" },
+                table: "Invoices",
+                columns: new[] { "InvoiceId", "AmountPaid", "InvoiceDate", "PaymentDate", "PaymentTermsId", "PaymentTotal", "VendorId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 8, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 0.0, 1 },
-                    { 2, new DateTime(2022, 8, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 0.0, 1 },
-                    { 3, new DateTime(2022, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 0.0, 2 },
-                    { 4, new DateTime(2022, 9, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 4, 0.0, 2 },
-                    { 5, new DateTime(2022, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 0.0, 3 },
-                    { 6, new DateTime(2022, 10, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 4, 0.0, 3 },
-                    { 7, new DateTime(2022, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 0.0, 4 },
-                    { 8, new DateTime(2022, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 5, 0.0, 4 },
-                    { 9, new DateTime(2022, 11, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 0.0, 5 },
-                    { 10, new DateTime(2022, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 0.0, 6 },
-                    { 11, new DateTime(2022, 12, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 2, 0.0, 7 },
-                    { 12, new DateTime(2022, 12, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 0.0, 8 }
+                    { 1, 10.0, new DateTime(2022, 8, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 0.0, 1 },
+                    { 2, 0.0, new DateTime(2022, 8, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 0.0, 1 },
+                    { 3, 7.0, new DateTime(2022, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 0.0, 2 },
+                    { 4, 0.0, new DateTime(2022, 9, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 4, 0.0, 2 },
+                    { 5, 11.0, new DateTime(2022, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 0.0, 3 },
+                    { 6, 0.0, new DateTime(2022, 10, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 4, 0.0, 3 },
+                    { 7, 13.0, new DateTime(2022, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 0.0, 4 },
+                    { 8, 0.0, new DateTime(2022, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 5, 0.0, 4 },
+                    { 9, 10.0, new DateTime(2022, 11, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 0.0, 5 },
+                    { 10, 6.0, new DateTime(2022, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 0.0, 6 },
+                    { 11, 2.0, new DateTime(2022, 12, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 2, 0.0, 7 },
+                    { 12, 5.0, new DateTime(2022, 12, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 0.0, 8 }
                 });
 
             migrationBuilder.InsertData(
-                table: "InvoiceLineItem",
+                table: "InvoiceLineItems",
                 columns: new[] { "InvoiceLineItemId", "Amount", "Description", "InvoiceId" },
                 values: new object[,]
                 {
@@ -175,29 +194,32 @@ namespace VendorInvoicing.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Invoice_PaymentTermsId",
-                table: "Invoice",
+                name: "IX_InvoiceLineItems_InvoiceId",
+                table: "InvoiceLineItems",
+                column: "InvoiceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InvoicePaymentTerms_PaymentTermsId",
+                table: "InvoicePaymentTerms",
                 column: "PaymentTermsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Invoice_VendorId",
-                table: "Invoice",
+                name: "IX_Invoices_VendorId",
+                table: "Invoices",
                 column: "VendorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_InvoiceLineItem_InvoiceId",
-                table: "InvoiceLineItem",
-                column: "InvoiceId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "InvoiceLineItem");
+                name: "InvoiceLineItems");
 
             migrationBuilder.DropTable(
-                name: "Invoice");
+                name: "InvoicePaymentTerms");
+
+            migrationBuilder.DropTable(
+                name: "Invoices");
 
             migrationBuilder.DropTable(
                 name: "PaymentTerms");

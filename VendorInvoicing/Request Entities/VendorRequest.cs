@@ -1,11 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace VendorInvoicing.Entities
+namespace VendorInvoicing.Request_Entities
 {
-    public class Vendor
+    public class VendorRequest
     {
-        public int VendorId { get; set; }
-
         [Required(ErrorMessage = "Please enter a name.")]
         public string? Name { get; set; }
         [Required(ErrorMessage = "Please enter an address.")]
@@ -32,9 +30,5 @@ namespace VendorInvoicing.Entities
         [DataType(DataType.EmailAddress)]
         public string? VendorContactEmail { get; set; }
 
-        public bool IsDeleted { get; set; } = false;
-
-        // Nav to all Invoices:
-        public ICollection<Invoice>? Invoices { get; set; }
     }
 }

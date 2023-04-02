@@ -8,7 +8,5 @@
 
         public int DueDays { get; set; }
 
-        // Nav to invoices:
-        //public List<Invoice>? Invoices { get; set; }
     }
 }

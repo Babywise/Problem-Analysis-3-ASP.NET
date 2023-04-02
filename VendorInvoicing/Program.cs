@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using VendorInvoicing.Components;
 using VendorInvoicing.Entities;
 using VendorInvoicing.Services;
 
@@ -13,6 +14,7 @@ string connStr = builder.Configuration.GetConnectionString("VendorsDB");
 // DI container's services, specifying that we are using SQL server:
 builder.Services.AddDbContext<VendorsContext>(options => options.UseSqlServer(connStr));
 builder.Services.AddScoped<IVendorInvoicingService, DbVendorInvoicingService>();
+builder.Services.AddScoped<InvoiceLineItemsViewComponent>();
 
 var app = builder.Build();
 

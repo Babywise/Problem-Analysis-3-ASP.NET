@@ -1,4 +1,4 @@
-﻿@model VendorViewModel
+﻿@model VendorListViewModel
 @{
     ViewData["Title"] = "List of Vendors";
     int buttonOffest = 4;
@@ -56,8 +56,8 @@
                 <th scope="col" class="text-nowrap">Vendor Contact<br/>First Name</th>
                 <th scope="col" class="text-nowrap">Vendor Contact Email</th>
                 <th scope="col" class="text-nowrap">Vendor Phone</th>
-                <th scope="col" class="text-nowrap">Edit</th>
                 <th scope="col" class="text-nowrap">Invoices</th>
+                <th scope="col" class="text-nowrap">Edit</th>
                 <th scope="col" class="text-nowrap">Delete</th>
                 <th scope="col" class="text-nowrap"></th>
             </tr>
@@ -77,18 +77,14 @@
                         <td>@Model.vendors.ElementAt(i).VendorContactEmail</td>
                         <td class="text-nowrap text-center">@Model.vendors.ElementAt(i).VendorPhone</td>
                         <td class="text-center">
-                            <form id="vendorEditRequest-@i" asp-controller="Vendor" asp-action="Edit" asp-route-id="@Model.vendors.ElementAt(i).VendorId">
-                                <button class="btn btn-outline-primary" type="submit" onclick="event.preventDefault(); document.getElementById('vendorEditRequest-@i').submit();">
-                                    Edit
-                                </button>
-                            </form>
+                            <div>
+                                <a asp-controller="Vendor" asp-action="GetInvoicesForVendor" asp-route-vendorId="@Model.vendors.ElementAt(i).VendorId" class="btn btn-primary">Invoices</a>
+                            </div>
                         </td>
                         <td class="text-center">
-                            <form id="vendorInvoicesRequest-@i" asp-controller="Vendor" asp-action="GetInvoicesForVendor" asp-route-id="@Model.vendors.ElementAt(i).VendorId">
-                                <button class="btn btn-primary" type="submit" onclick="event.preventDefault(); document.getElementById('vendorInvoicesRequest-@i').submit();">
-                                    Invoices
-                                </button>
-                            </form>
+                            <div>
+                                <a asp-controller="Vendor" asp-action="GetEditVendor" asp-route-id="@Model.vendors.ElementAt(i).VendorId" class="btn btn-outline-primary">Edit</a>
+                            </div>
                         </td>
                         <td class="text-center">
                             @if (Model.vendors.ElementAt(i).IsDeleted)

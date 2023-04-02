@@ -5,8 +5,8 @@ namespace VendorInvoicing.Entities
     public class VendorsContext : DbContext
     {
         public VendorsContext(DbContextOptions<VendorsContext> options)
-            : base(options) 
-        { 
+            : base(options)
+        {
         }
 
         public DbSet<PaymentTerms> PaymentTerms { get; set; }
@@ -16,7 +16,23 @@ namespace VendorInvoicing.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //base.OnModelCreating(modelBuilder);
+            // InvoiceLineItem and Invoice FK relationship (Many-to-1)
+            modelBuilder.Entity<InvoiceLineItem>()
+                .HasOne(ili => ili.Invoice)
+                .WithMany(i => i.InvoiceLineItems)
+                .HasForeignKey(ili => ili.InvoiceId);
+
+            // Invoice and Vendor FK relationship (Many-to-1)
+            modelBuilder.Entity<Invoice>()
+                .HasOne(i => i.Vendor)
+                .WithMany(v => v.Invoices)
+                .HasForeignKey(i => i.VendorId);
+
+            // Vendor and Invoices FK relationship (1-to-Many)
+            modelBuilder.Entity<Vendor>()
+                .HasMany(v => v.Invoices)
+                .WithOne(i => i.Vendor)
+                .HasForeignKey(i => i.VendorId);
 
             modelBuilder.Entity<PaymentTerms>().HasData(
                 new PaymentTerms() { PaymentTermsId = 1, Description = "Net due 10 days", DueDays = 10 },
@@ -132,18 +148,18 @@ namespace VendorInvoicing.Entities
             );
 
             modelBuilder.Entity<Invoice>().HasData(
-                new Invoice() { InvoiceId = 1, InvoiceDate = new DateTime(2022, 8, 5), PaymentTermsId = 3, VendorId = 1 },
+                new Invoice() { InvoiceId = 1, InvoiceDate = new DateTime(2022, 8, 5), PaymentTermsId = 3, VendorId = 1, AmountPaid = 10 },
                 new Invoice() { InvoiceId = 2, InvoiceDate = new DateTime(2022, 8, 17), PaymentTermsId = 3, VendorId = 1 },
-                new Invoice() { InvoiceId = 3, InvoiceDate = new DateTime(2022, 9, 7), PaymentTermsId = 3, VendorId = 2 },
+                new Invoice() { InvoiceId = 3, InvoiceDate = new DateTime(2022, 9, 7), PaymentTermsId = 3, VendorId = 2, AmountPaid = 7 },
                 new Invoice() { InvoiceId = 4, InvoiceDate = new DateTime(2022, 9, 28), PaymentTermsId = 4, VendorId = 2 },
-                new Invoice() { InvoiceId = 5, InvoiceDate = new DateTime(2022, 10, 8), PaymentTermsId = 3, VendorId = 3 },
+                new Invoice() { InvoiceId = 5, InvoiceDate = new DateTime(2022, 10, 8), PaymentTermsId = 3, VendorId = 3, AmountPaid = 11 },
                 new Invoice() { InvoiceId = 6, InvoiceDate = new DateTime(2022, 10, 31), PaymentTermsId = 4, VendorId = 3 },
-                new Invoice() { InvoiceId = 7, InvoiceDate = new DateTime(2022, 11, 11), PaymentTermsId = 3, VendorId = 4 },
+                new Invoice() { InvoiceId = 7, InvoiceDate = new DateTime(2022, 11, 11), PaymentTermsId = 3, VendorId = 4, AmountPaid = 13 },
                 new Invoice() { InvoiceId = 8, InvoiceDate = new DateTime(2022, 11, 12), PaymentTermsId = 5, VendorId = 4 },
-                new Invoice() { InvoiceId = 9, InvoiceDate = new DateTime(2022, 11, 24), PaymentTermsId = 3, VendorId = 5 },
-                new Invoice() { InvoiceId = 10, InvoiceDate = new DateTime(2022, 12, 8), PaymentTermsId = 3, VendorId = 6 },
-                new Invoice() { InvoiceId = 11, InvoiceDate = new DateTime(2022, 12, 21), PaymentTermsId = 2, VendorId = 7 },
-                new Invoice() { InvoiceId = 12, InvoiceDate = new DateTime(2022, 12, 23), PaymentTermsId = 3, VendorId = 8 }
+                new Invoice() { InvoiceId = 9, InvoiceDate = new DateTime(2022, 11, 24), PaymentTermsId = 3, VendorId = 5, AmountPaid = 10 },
+                new Invoice() { InvoiceId = 10, InvoiceDate = new DateTime(2022, 12, 8), PaymentTermsId = 3, VendorId = 6, AmountPaid = 6 },
+                new Invoice() { InvoiceId = 11, InvoiceDate = new DateTime(2022, 12, 21), PaymentTermsId = 2, VendorId = 7, AmountPaid = 2 },
+                new Invoice() { InvoiceId = 12, InvoiceDate = new DateTime(2022, 12, 23), PaymentTermsId = 3, VendorId = 8, AmountPaid = 5 }
             );
 
             modelBuilder.Entity<InvoiceLineItem>().HasData(

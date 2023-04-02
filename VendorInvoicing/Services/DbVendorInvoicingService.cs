@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using VendorInvoicing.Entities;
 using VendorInvoicing.Models;
 
@@ -10,6 +11,26 @@ namespace VendorInvoicing.Services
         public DbVendorInvoicingService(VendorsContext vendorInvoicingService)
         {
             _vendorsContext = vendorInvoicingService;
+        }
+
+        public bool AddInvoice(Invoice invoice)
+        {
+            _vendorsContext.Invoices.Add(invoice);
+            if (_vendorsContext.SaveChanges() != 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool AddInvoiceLineItem(InvoiceLineItem invoiceLineItem)
+        {
+            _vendorsContext.InvoiceLineItems.Add(invoiceLineItem);
+            if (_vendorsContext.SaveChanges() != 0)
+            {
+                return true;
+            }
+            return false;
         }
 
         public bool DeleteVendorById(int id)
@@ -25,25 +46,82 @@ namespace VendorInvoicing.Services
             return false;
         }
 
-        public List<Vendor> GetAllVendors()
+        public ICollection<Vendor> GetAllVendors()
         {
-            return _vendorsContext.Vendors
+            ICollection<Vendor> vendors;
+            vendors = _vendorsContext.Vendors
+                .Include(v => v.Invoices)
+                    .ThenInclude(i => i.InvoiceLineItems)
                 .OrderBy(v => v.Name)
                 .ToList();
+
+            foreach (Vendor v in vendors)
+            {
+                foreach (Invoice invoice in v.Invoices)
+                {
+                    invoice.PaymentTerms = _vendorsContext.PaymentTerms
+                        .OrderBy(pt => pt.PaymentTermsId)
+                        .ToList();
+                }
+            }
+            return vendors;
+        }
+
+        public Invoice GetInvoiceById(int id)
+        {
+            return _vendorsContext.Invoices.Where(i => i.InvoiceId == id).FirstOrDefault();
         }
 
         public Vendor GetVendorById(int id)
         {
-            return _vendorsContext.Vendors
-                .Find(id);
+            Vendor vendor = _vendorsContext.Vendors
+                .Where(v => v.VendorId == id)
+                .Include(v => v.Invoices)
+                    .ThenInclude(i => i.InvoiceLineItems)
+                .OrderBy(v => v.Name)
+                .FirstOrDefault();
+
+            foreach (Invoice invoice in vendor.Invoices)
+            {
+                invoice.PaymentTerms = _vendorsContext.PaymentTerms
+                    .OrderBy(pt => pt.PaymentTermsId)
+                    .ToList();
+            }
+
+            return vendor;
         }
 
-        public List<Vendor> GetVendorsInRangeAZ(string startingLetter, string endingLetter)
+        public ICollection<Vendor> GetVendorsInRangeAZ(string startingLetter, string endingLetter)
         {
             return _vendorsContext.Vendors
                 .OrderBy(v => v.Name)
                 .Where(e => e.Name.CompareTo(startingLetter) >= 0 && e.Name.CompareTo(endingLetter) <= 0)
                 .ToList();
+        }
+
+        public bool UndoDeleteVendorById(int id)
+        {
+            Vendor vendor = _vendorsContext.Vendors.Where(v => v.VendorId == id).FirstOrDefault();
+            if (vendor != null)
+            {
+                vendor.IsDeleted = false;
+                _vendorsContext.Vendors.Update(vendor);
+                _vendorsContext.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public bool UpdateVendor(Vendor vendor)
+        {
+            Vendor vendorFromDB = _vendorsContext.Vendors.Where(v => v.VendorId == vendor.VendorId).FirstOrDefault();
+            if (vendor != null)
+            {
+                _vendorsContext.Vendors.Update(vendor);
+                _vendorsContext.SaveChanges();
+                return true;
+            }
+            return false;
         }
     }
 }

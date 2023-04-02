@@ -20,3 +20,12 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.table tbody tr.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+tr.selected {
+    background-color: yellow;
+}

@@ -1,13 +1,6 @@
-E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\obj\Debug\net7.0\VendorInvoicing.csproj.AssemblyReference.cache
-E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\obj\Debug\net7.0\VendorInvoicing.GeneratedMSBuildEditorConfig.editorconfig
-E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\obj\Debug\net7.0\VendorInvoicing.AssemblyInfoInputs.cache
-E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\obj\Debug\net7.0\VendorInvoicing.AssemblyInfo.cs
-E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\obj\Debug\net7.0\VendorInvoicing.csproj.CoreCompileInputs.cache
-E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\obj\Debug\net7.0\VendorInvoicing.MvcApplicationPartsAssemblyInfo.cache
-E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\obj\Debug\net7.0\VendorInvoicing.RazorAssemblyInfo.cache
-E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\obj\Debug\net7.0\VendorInvoicing.RazorAssemblyInfo.cs
 E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\bin\Debug\net7.0\appsettings.Development.json
 E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\bin\Debug\net7.0\appsettings.json
+E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\bin\Debug\net7.0\libman.json
 E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\bin\Debug\net7.0\VendorInvoicing.staticwebassets.runtime.json
 E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\bin\Debug\net7.0\VendorInvoicing.exe
 E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\bin\Debug\net7.0\VendorInvoicing.deps.json
@@ -57,6 +50,14 @@ E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\bin\Debug\net7.0\runtimes\w
 E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\bin\Debug\net7.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\bin\Debug\net7.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\obj\Debug\net7.0\VendorInvoicing.csproj.AssemblyReference.cache
+E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\obj\Debug\net7.0\VendorInvoicing.GeneratedMSBuildEditorConfig.editorconfig
+E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\obj\Debug\net7.0\VendorInvoicing.AssemblyInfoInputs.cache
+E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\obj\Debug\net7.0\VendorInvoicing.AssemblyInfo.cs
+E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\obj\Debug\net7.0\VendorInvoicing.csproj.CoreCompileInputs.cache
+E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\obj\Debug\net7.0\VendorInvoicing.MvcApplicationPartsAssemblyInfo.cache
+E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\obj\Debug\net7.0\VendorInvoicing.RazorAssemblyInfo.cache
+E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\obj\Debug\net7.0\VendorInvoicing.RazorAssemblyInfo.cs
 E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\obj\Debug\net7.0\staticwebassets\msbuild.VendorInvoicing.Microsoft.AspNetCore.StaticWebAssets.props
 E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\obj\Debug\net7.0\staticwebassets\msbuild.build.VendorInvoicing.props
 E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.VendorInvoicing.props
@@ -73,4 +74,3 @@ E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\obj\Debug\net7.0\refint\Ven
 E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\obj\Debug\net7.0\VendorInvoicing.pdb
 E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\obj\Debug\net7.0\VendorInvoicing.genruntimeconfig.cache
 E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\obj\Debug\net7.0\ref\VendorInvoicing.dll
-E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\bin\Debug\net7.0\libman.json
