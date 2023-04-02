@@ -8,5 +8,7 @@
 
         public int DueDays { get; set; }
 
+        public ICollection<Invoice> Invoices { get; set; }
+
     }
 }

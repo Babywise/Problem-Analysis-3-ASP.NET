@@ -46,6 +46,11 @@ namespace VendorInvoicing.Services
             return false;
         }
 
+        public ICollection<Invoice> GetAllInvoices(int vendorId)
+        {
+            return _vendorsContext.Invoices.Where(i => i.VendorId == vendorId).ToList();
+        }
+
         public ICollection<Vendor> GetAllVendors()
         {
             ICollection<Vendor> vendors;
@@ -78,6 +83,8 @@ namespace VendorInvoicing.Services
                 .Where(v => v.VendorId == id)
                 .Include(v => v.Invoices)
                     .ThenInclude(i => i.InvoiceLineItems)
+                .Include(v => v.Invoices)
+                    .ThenInclude(i => i.PaymentTerm)
                 .OrderBy(v => v.Name)
                 .FirstOrDefault();
 
@@ -95,7 +102,7 @@ namespace VendorInvoicing.Services
         {
             return _vendorsContext.Vendors
                 .OrderBy(v => v.Name)
-                .Where(e => e.Name.CompareTo(startingLetter) >= 0 && e.Name.CompareTo(endingLetter) <= 0)
+                .Where(v => v.Name.CompareTo(startingLetter) >= 0 && v.Name.CompareTo(endingLetter) <= 0)
                 .ToList();
         }
 
@@ -115,7 +122,7 @@ namespace VendorInvoicing.Services
         public bool UpdateVendor(Vendor vendor)
         {
             Vendor vendorFromDB = _vendorsContext.Vendors.Where(v => v.VendorId == vendor.VendorId).FirstOrDefault();
-            if (vendor != null)
+            if (vendorFromDB != null)
             {
                 _vendorsContext.Vendors.Update(vendor);
                 _vendorsContext.SaveChanges();

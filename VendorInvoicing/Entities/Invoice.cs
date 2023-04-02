@@ -28,7 +28,7 @@
         public int PaymentTermsId { get; set; }
 
         // Nav to associated terms:
-        //public PaymentTerms? PaymentTerm { get; set; }
+        public PaymentTerms? PaymentTerm { get; set; }
         // Nav to All terms
         public List<PaymentTerms>? PaymentTerms { get; set; }
 

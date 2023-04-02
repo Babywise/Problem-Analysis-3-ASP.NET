@@ -6,13 +6,14 @@
 
 <div class="text-center">
     <div class="d-flex justify-content-center">
-        <form class="m-1" id="vendorAllRequest" asp-controller="Vendor" asp-action="GetSortedVendorList"
+        <div class="m-1"><a class="btn btn-outline-secondary" asp-controller="Vendor" asp-action="GetSortedVendorList" asp-route-startingLetter="A" asp-route-endingLetter="Z">All</a></div>
+        @*<form class="m-1" id="vendorAllRequest" asp-controller="Vendor" asp-action="GetSortedVendorList"
         asp-route-startingLetter="A" asp-route-endingLetter="Z"
         method="post" enctype="application/x-www-form-urlencoded">
             <button class="btn btn-outline-secondary" type="submit" onclick="event.preventDefault(); document.getElementById('vendorAllRequest').submit();">
                 All
             </button>
-        </form>
+        </form>*@
 
         @for (int i = 0; i < 5; i++)
         {

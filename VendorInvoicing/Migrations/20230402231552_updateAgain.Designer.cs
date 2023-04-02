@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VendorInvoicing.Entities;
 
@@ -11,9 +12,11 @@ using VendorInvoicing.Entities;
 namespace VendorInvoicing.Migrations
 {
     [DbContext(typeof(VendorsContext))]
-    partial class VendorsContextModelSnapshot : ModelSnapshot
+    [Migration("20230402231552_updateAgain")]
+    partial class updateAgain
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

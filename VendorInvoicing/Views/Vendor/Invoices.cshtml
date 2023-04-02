@@ -25,7 +25,8 @@
     </br>
     <div class="d-flex p-1">
         <div class="flex-fill p-2 flex-column float-start">
-            <h4><b>Invoices</b></h4>
+            @await Component.InvokeAsync("InvoiceDetails", new {vendorId=@Model.vendor.VendorId, invoiceId=@Model.SelectedInvoiceId})
+            @*<h4><b>Invoices</b></h4>
             <table id="invoiceTable" class="table table-striped table-hover" style="width:100%; border: 1px solid black; border-collapse: collapse;"
                    >
                 <thead>
@@ -83,7 +84,7 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-lg">Add Invoice</button>
-            </form>
+            </form>*@
         </div>
         <div class="flex-fill p-2 flex-column float-start">
             @await Component.InvokeAsync("InvoiceLineItems", new {vendorId=@Model.vendor.VendorId, invoiceId=@Model.SelectedInvoiceId})

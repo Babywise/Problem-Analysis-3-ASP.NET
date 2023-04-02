@@ -4,6 +4,7 @@ namespace VendorInvoicing.Services
 {
     public interface IVendorInvoicingService
     {
+        public ICollection<Invoice> GetAllInvoices(int vendorId);
         public Invoice GetInvoiceById(int id);
         public bool AddInvoice(Invoice invoice);
         public bool AddInvoiceLineItem(InvoiceLineItem invoiceLineItem);

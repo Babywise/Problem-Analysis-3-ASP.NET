@@ -24,12 +24,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Coding/ASP.NET/Problem Analysis 3/VendorInvoicing/Views/Shared/Components/InvoiceLineItems/Default.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcSW52b2ljZUxpbmVJdGVtc1xEZWZhdWx0LmNzaHRtbA==
+[E:/Coding/ASP.NET/Problem Analysis 3/VendorInvoicing/Views/Shared/Components/InvoiceDetails/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcSW52b2ljZURldGFpbHNcRGVmYXVsdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Coding/ASP.NET/Problem Analysis 3/VendorInvoicing/Views/Shared/Components/VendorFields/Default.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcVmVuZG9yRmllbGRzXERlZmF1bHQuY3NodG1s
+[E:/Coding/ASP.NET/Problem Analysis 3/VendorInvoicing/Views/Shared/Components/InvoiceLineItems/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcSW52b2ljZUxpbmVJdGVtc1xEZWZhdWx0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/Coding/ASP.NET/Problem Analysis 3/VendorInvoicing/Views/Shared/Error.cshtml]
