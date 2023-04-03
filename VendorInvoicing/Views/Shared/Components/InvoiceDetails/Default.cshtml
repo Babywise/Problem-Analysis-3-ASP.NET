@@ -32,7 +32,7 @@
         }
     </tbody>
 </table>
-            </br>
+</br>
 <form asp-controller="Vendor" asp-action="AddInvoice" asp-route-vendorId="@Model.vendorId" asp-route-invoiceId="@Model.SelectedInvoiceId"
       method="post" enctype="application/x-www-form-urlencoded">
     <input type="hidden" asp-for="addInvoiceRequest.vendorId" value="@Model.vendorId" />

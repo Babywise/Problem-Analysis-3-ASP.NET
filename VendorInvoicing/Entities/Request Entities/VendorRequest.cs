@@ -12,11 +12,12 @@ namespace VendorInvoicing.Request_Entities
         [Required(ErrorMessage = "Please enter a city.")]
         public string? City { get; set; }
         [Required(ErrorMessage = "Please enter a province or state.")]
-        [RegularExpression(@"^(AB|BC|MB|NB|NL|NT|NS|NU|ON|PE|QC|SK|YT)$", ErrorMessage = "Please enter a valid Canadian province abbreviation.")]
-        [StringLength(2, MinimumLength = 2, ErrorMessage = "Province Or State must be 2 letter. (Ex. \"AB\")")]
+        [RegularExpression(@"^((AB|BC|MB|NB|NL|NT|NS|NU|ON|PE|QC|SK|YT)|([A-Z]{2})|(AL|AK|AZ|AR|CA|CO|CT|DE|DC|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY))$", 
+            ErrorMessage = "Please enter a valid province or state abbreviation.")]
+        [StringLength(2, MinimumLength = 2, ErrorMessage = "Province or state must be a 2-letter abbreviation. (Ex. \"AB\")")]
         public string? ProvinceOrState { get; set; }
-        [Required(ErrorMessage = "Please enter a Zip or postal code.")]
-        [RegularExpression(@"^[A-Z]\d[A-Z] \d[A-Z]\d$", ErrorMessage = "Please enter a valid Canadian postal code.")]
+        [Required(ErrorMessage = "Please enter a zip or postal code.")]
+        [RegularExpression(@"^([A-Z]\d[A-Z] \d[A-Z]\d|\d{5}([\-]\d{4})?)$", ErrorMessage = "Please enter a valid zip or postal code.")]
         [DataType(DataType.PostalCode)]
         public string? ZipOrPostalCode { get; set; }
         [Required(ErrorMessage = "Please enter a phone number.")]

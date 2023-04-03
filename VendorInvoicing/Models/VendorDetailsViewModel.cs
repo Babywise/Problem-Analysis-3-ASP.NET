@@ -10,9 +10,7 @@ namespace VendorInvoicing.Models
     {
         public Vendor vendor { get; set; }
         public int? SelectedInvoiceId { get; set; }
-        public DateTime? SelectedInvoiceDate { get; set; }
-        public int? SelectedPaymentTermId { get; set; }
-        public AddInvoiceRequest? addInvoice { get; set; }
+        public InvoiceDetailsViewModel? InvoiceDetailsViewModel { get; set; }
         public InvoiceLineItemsViewModel? InvoiceLineItemsViewModel { get; set; }
     }
 }

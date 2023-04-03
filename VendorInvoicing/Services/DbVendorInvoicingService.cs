@@ -16,21 +16,15 @@ namespace VendorInvoicing.Services
         public bool AddInvoice(Invoice invoice)
         {
             _vendorsContext.Invoices.Add(invoice);
-            if (_vendorsContext.SaveChanges() != 0)
-            {
-                return true;
-            }
-            return false;
+
+            return _vendorsContext.SaveChanges() != 0 ? true : false;
+
         }
 
         public bool AddInvoiceLineItem(InvoiceLineItem invoiceLineItem)
         {
             _vendorsContext.InvoiceLineItems.Add(invoiceLineItem);
-            if (_vendorsContext.SaveChanges() != 0)
-            {
-                return true;
-            }
-            return false;
+            return _vendorsContext.SaveChanges() != 0 ? true : false;
         }
 
         public bool DeleteVendorById(int id)
@@ -70,6 +64,11 @@ namespace VendorInvoicing.Services
                 }
             }
             return vendors;
+        }
+
+        public int? GetDeletedVendorId()
+        {
+            return _vendorsContext.Vendors?.Where(v => v.IsDeleted == true).FirstOrDefault()?.VendorId;
         }
 
         public Invoice GetInvoiceById(int id)

@@ -8,6 +8,7 @@ namespace VendorInvoicing.Services
         public Invoice GetInvoiceById(int id);
         public bool AddInvoice(Invoice invoice);
         public bool AddInvoiceLineItem(InvoiceLineItem invoiceLineItem);
+        public int? GetDeletedVendorId();
         public bool DeleteVendorById(int id);
         public bool UndoDeleteVendorById(int id);
         public bool UpdateVendor(Vendor vendor);

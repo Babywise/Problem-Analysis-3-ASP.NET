@@ -45,6 +45,7 @@ namespace VendorInvoicing.Controllers
             {
                 vendorListViewModel.vendors = _vendorInvoicingService.GetAllVendors();
             }
+            vendorListViewModel.DeletedVendorId = _vendorInvoicingService.GetDeletedVendorId();
             return View("List", vendorListViewModel);
         }
         [HttpPost("/Vendor/List/")]
@@ -156,7 +157,8 @@ namespace VendorInvoicing.Controllers
         [HttpPost("/Vendor/{vendorId}/Invoices/{invoiceId}/AddLineItem")]
         public IActionResult AddLineItem(int vendorId, int invoiceId, InvoiceLineItemsViewModel invoiceLineItemsViewModel)
         {
-            if (invoiceLineItemsViewModel != null)
+            if (invoiceLineItemsViewModel.addLineItemRequest.Description != null &&
+                invoiceLineItemsViewModel.addLineItemRequest.Amount != null)
             {
                 InvoiceLineItem invoiceLineItem = new InvoiceLineItem()
                 {
@@ -166,47 +168,73 @@ namespace VendorInvoicing.Controllers
                 };
                 if (_vendorInvoicingService.AddInvoiceLineItem(invoiceLineItem))
                 {
-                    return RedirectToAction("GetInvoicesForVendor", "Vendor", new { vendorId = invoiceLineItemsViewModel.addLineItemRequest.vendorId, invoiceId = invoiceId });
-                }
-            }
-            invoiceLineItemsViewModel = new InvoiceLineItemsViewModel()
-            {
-                addLineItemRequest = new AddLineItemRequest(),
-                invoice = _vendorInvoicingService.GetInvoiceById(invoiceId),
-                vendorId = vendorId,
-            };
-            return View("Invoices", invoiceLineItemsViewModel);
-        }
-
-        [HttpPost("/Vendor/{vendorId}/Invoices/{invoiceId}/AddInvoice")]
-        public IActionResult AddInvoice(int vendorId, VendorDetailsViewModel vendorDetailsViewModel)
-        {
-            if (vendorDetailsViewModel.addInvoice.InvoiceDate != null &&
-                vendorDetailsViewModel.addInvoice.PaymentTermsId != null &&
-                vendorDetailsViewModel.SelectedInvoiceId != null)
-            {
-                Invoice invoice = new Invoice()
-                {
-                    VendorId = vendorDetailsViewModel.addInvoice.vendorId,
-                    InvoiceDate = vendorDetailsViewModel.addInvoice.InvoiceDate,
-                    PaymentTermsId = vendorDetailsViewModel.addInvoice.PaymentTermsId,
-                };
-                if (_vendorInvoicingService.AddInvoice(invoice))
-                {
-                    TempData["LastActionMessage"] = $"Invoice sucessfully created for {invoice.InvoiceDate}";
-                    return RedirectToAction("GetInvoicesForVendor", "Vendor", new { vendorId = vendorDetailsViewModel.addInvoice.vendorId, invoiceId = vendorDetailsViewModel.SelectedInvoiceId });
+                    TempData["LastActionMessage"] = $"Line Item sucessfully created for Invoice {invoiceLineItem.InvoiceId}";
+                    return RedirectToAction("GetInvoicesForVendor", "Vendor", new { vendorId = invoiceLineItemsViewModel.addLineItemRequest.vendorId, invoiceId = invoiceLineItem.InvoiceId });
                 }
                 else
                 {
                     TempData["ErrorMessage"] = "Error adding Invoice";
-                    return RedirectToAction("GetInvoicesForVendor", "Vendor", new { vendorId = vendorDetailsViewModel.addInvoice.vendorId });
+                    return RedirectToAction("GetInvoicesForVendor", "Vendor", new { vendorId = invoiceLineItemsViewModel.addLineItemRequest.vendorId, invoiceId = invoiceId });
                 }
             }
-            vendorDetailsViewModel = new VendorDetailsViewModel()
+            VendorDetailsViewModel vendorDetailsViewModel = new VendorDetailsViewModel()
             {
                 vendor = _vendorInvoicingService.GetVendorById(vendorId),
-                SelectedInvoiceId = vendorDetailsViewModel.SelectedInvoiceId,
-                InvoiceLineItemsViewModel = new InvoiceLineItemsViewModel(),
+                InvoiceLineItemsViewModel = invoiceLineItemsViewModel,
+                SelectedInvoiceId = invoiceId,
+                InvoiceDetailsViewModel = new InvoiceDetailsViewModel()
+                {
+                    vendorId = vendorId,
+                    SelectedInvoiceId = invoiceId,
+                    invoices = _vendorInvoicingService.GetAllInvoices(vendorId),
+                    addInvoiceRequest = new AddInvoiceRequest() 
+                    {
+                        vendorId = vendorId,
+                    },
+                },
+            };
+            return View("Invoices", vendorDetailsViewModel);
+        }
+
+        [HttpPost("/Vendor/{vendorId}/Invoices/{invoiceId}/AddInvoice")]
+        public IActionResult AddInvoice(int vendorId, InvoiceDetailsViewModel invoiceDetailsViewModel)
+        {
+            if (invoiceDetailsViewModel.addInvoiceRequest.InvoiceDate != null &&
+                invoiceDetailsViewModel.addInvoiceRequest.PaymentTermsId != null &&
+                invoiceDetailsViewModel.SelectedInvoiceId != null)
+            {
+                Invoice invoice = new Invoice()
+                {
+                    VendorId = invoiceDetailsViewModel.addInvoiceRequest.vendorId,
+                    InvoiceDate = invoiceDetailsViewModel.addInvoiceRequest.InvoiceDate,
+                    PaymentTermsId = invoiceDetailsViewModel.addInvoiceRequest.PaymentTermsId,
+                };
+                if (_vendorInvoicingService.AddInvoice(invoice))
+                {
+                    TempData["LastActionMessage"] = $"Invoice sucessfully created for {invoice.InvoiceDate}";
+                    return RedirectToAction("GetInvoicesForVendor", "Vendor", new { vendorId = vendorId, invoiceId = invoiceDetailsViewModel.SelectedInvoiceId });
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Error adding Invoice";
+                    return RedirectToAction("GetInvoicesForVendor", "Vendor", new { vendorId = invoiceDetailsViewModel.addInvoiceRequest.vendorId });
+                }
+            }
+            VendorDetailsViewModel vendorDetailsViewModel = new VendorDetailsViewModel()
+            {
+                vendor = _vendorInvoicingService.GetVendorById(vendorId),
+                InvoiceDetailsViewModel = invoiceDetailsViewModel,
+                SelectedInvoiceId = invoiceDetailsViewModel.SelectedInvoiceId,
+                InvoiceLineItemsViewModel = new InvoiceLineItemsViewModel()
+                {
+                    vendorId = vendorId,
+                    invoice = _vendorInvoicingService.GetInvoiceById((int)invoiceDetailsViewModel.SelectedInvoiceId),
+                    addLineItemRequest = new AddLineItemRequest()
+                    {
+                        vendorId = vendorId,
+                        invoiceId = (int)invoiceDetailsViewModel.SelectedInvoiceId
+                    }
+                },
             };
             return View("Invoices", vendorDetailsViewModel);
         }
@@ -220,7 +248,7 @@ namespace VendorInvoicing.Controllers
             {
                 if (_vendorInvoicingService.DeleteVendorById(id))
                 {
-                    TempData["LastActionMessage"] = $"Successfully deleted \"{vendor.Name}\".";
+                    TempData["LastActionMessageUndo"] = $"Successfully deleted \"{vendor.Name}\".";
                 }
                 else
                 {
