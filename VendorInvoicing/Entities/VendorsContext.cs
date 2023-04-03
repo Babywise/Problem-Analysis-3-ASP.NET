@@ -20,40 +20,22 @@ namespace VendorInvoicing.Entities
             modelBuilder.Entity<InvoiceLineItem>()
                 .HasOne(ili => ili.Invoice)
                 .WithMany(i => i.InvoiceLineItems)
-                .HasForeignKey(ili => ili.InvoiceId);
-
-            // Invoice and InvoiceLineItem FK relationship (1-to-Many)
-            modelBuilder.Entity<Invoice>()
-                .HasMany(i => i.InvoiceLineItems)
-                .WithOne(ili => ili.Invoice)
-                .HasForeignKey(ili => ili.InvoiceId);
+                .HasForeignKey(ili => ili.InvoiceId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             // Invoice and Vendor FK relationship (Many-to-1)
             modelBuilder.Entity<Invoice>()
                 .HasOne(i => i.Vendor)
                 .WithMany(v => v.Invoices)
-                .HasForeignKey(i => i.VendorId);
+                .HasForeignKey(i => i.VendorId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             // Vendor and Invoices FK relationship (1-to-Many)
             modelBuilder.Entity<Vendor>()
                 .HasMany(v => v.Invoices)
                 .WithOne(i => i.Vendor)
-                .HasForeignKey(i => i.VendorId);
-
-            // Invoice and PaymentTerm FK relationship (1-to-Many)
-            modelBuilder.Entity<Invoice>()
-                .HasOne(i => i.PaymentTerm)
-                .WithMany(pt => pt.Invoices)
-                .HasForeignKey(i => i.PaymentTermsId);
-
-            // Invoice and PaymentTerm FK relationship (1-to-Many)
-            modelBuilder.Entity<PaymentTerms>()
-                .HasMany(pt => pt.Invoices)
-                .WithOne(i => i.PaymentTerm)
-                .HasForeignKey(pt => pt.PaymentTermsId);
-
-            // Invoice and PaymentTerms FK relationship (1-to-Many)
-            modelBuilder.Entity<Invoice>().HasMany(i => i.PaymentTerms);
+                .HasForeignKey(i => i.VendorId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<PaymentTerms>().HasData(
                 new PaymentTerms() { PaymentTermsId = 1, Description = "Net due 10 days", DueDays = 10 },

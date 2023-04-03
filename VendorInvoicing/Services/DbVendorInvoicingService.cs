@@ -27,6 +27,39 @@ namespace VendorInvoicing.Services
             return _vendorsContext.SaveChanges() != 0 ? true : false;
         }
 
+        public bool AddVendor(Vendor vendor)
+        {
+            _vendorsContext.Vendors.Add(vendor);
+            return _vendorsContext.SaveChanges() != 0 ? true : false;
+        }
+
+        public bool DeleteAllisDeletedVendors()
+        {
+            var deletedVendors = _vendorsContext.Vendors.Where(v => v.IsDeleted == true)
+                .Include(v => v.Invoices)
+                    .ThenInclude(i => i.InvoiceLineItems)
+                .ToList();
+
+            if (deletedVendors.Count() > 0)
+            {
+                foreach (var vendor in deletedVendors)
+                {
+                    foreach (var invoice in vendor.Invoices)
+                    {
+                        foreach (var invoiceLineItem in invoice.InvoiceLineItems)
+                        {
+                            _vendorsContext.InvoiceLineItems.Remove(invoiceLineItem);
+                        }
+                        _vendorsContext.Invoices.Remove(invoice);
+                    }
+                    _vendorsContext.Vendors.Remove(vendor);
+                }
+                _vendorsContext.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
         public bool DeleteVendorById(int id)
         {
             Vendor vendor = _vendorsContext.Vendors.Where(v => v.VendorId == id).FirstOrDefault();
@@ -34,6 +67,18 @@ namespace VendorInvoicing.Services
             {
                 vendor.IsDeleted = true;
                 _vendorsContext.Vendors.Update(vendor);
+                _vendorsContext.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public bool FinalDeleteVendorById(int id)
+        {
+            Vendor vendor = _vendorsContext.Vendors.Where(v => v.VendorId == id).FirstOrDefault();
+            if (vendor != null)
+            {
+                _vendorsContext.Remove(vendor);
                 _vendorsContext.SaveChanges();
                 return true;
             }
@@ -53,16 +98,19 @@ namespace VendorInvoicing.Services
                     .ThenInclude(i => i.InvoiceLineItems)
                 .OrderBy(v => v.Name)
                 .ToList();
-
-            foreach (Vendor v in vendors)
+            if (vendors != null)
             {
-                foreach (Invoice invoice in v.Invoices)
+                foreach (Vendor v in vendors)
                 {
-                    invoice.PaymentTerms = _vendorsContext.PaymentTerms
-                        .OrderBy(pt => pt.PaymentTermsId)
-                        .ToList();
+                    foreach (Invoice invoice in v.Invoices)
+                    {
+                        invoice.PaymentTerms = _vendorsContext.PaymentTerms
+                            .OrderBy(pt => pt.PaymentTermsId)
+                            .ToList();
+                    }
                 }
             }
+            
             return vendors;
         }
 
@@ -86,12 +134,14 @@ namespace VendorInvoicing.Services
                     .ThenInclude(i => i.PaymentTerm)
                 .OrderBy(v => v.Name)
                 .FirstOrDefault();
-
-            foreach (Invoice invoice in vendor.Invoices)
+            if (vendor != null)
             {
-                invoice.PaymentTerms = _vendorsContext.PaymentTerms
-                    .OrderBy(pt => pt.PaymentTermsId)
-                    .ToList();
+                foreach (Invoice invoice in vendor.Invoices)
+                {
+                    invoice.PaymentTerms = _vendorsContext.PaymentTerms
+                        .OrderBy(pt => pt.PaymentTermsId)
+                        .ToList();
+                }
             }
 
             return vendor;

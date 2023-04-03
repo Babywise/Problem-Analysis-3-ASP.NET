@@ -16,6 +16,7 @@ builder.Services.AddDbContext<VendorsContext>(options => options.UseSqlServer(co
 builder.Services.AddScoped<IVendorInvoicingService, DbVendorInvoicingService>();
 builder.Services.AddScoped<InvoiceDetailsViewComponent>();
 builder.Services.AddScoped<InvoiceLineItemsViewComponent>();
+builder.Services.AddSingleton<IHostedService, ClearDeletedVendorsService>();
 
 var app = builder.Build();
 

@@ -7,16 +7,29 @@
     ViewData["Title"] = "List of Vendors";
     int buttonOffest = 4;
 }
+@*<div class="d-flex alert alert-success alert-dismissible fade show text-nowrap" role="alert">
+    <div class="align-items-center">
+        <div class="col-sm-10" style="display: inline-block;">
+            <span>This is a message</span>
+            <form asp-controller="Vendor" asp-action="UndoDelete" method="post" enctype="application/x-www-form-urlencoded">
+                <input type="hidden" name="id" value="@Model.DeletedVendorId" />
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="alert" aria-label="Undo">Undo</button>
+            </form>
+        </div>
+        <div class="col-sm-2" style="display: inline-block;">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>*@
 <div class="text-center">
     <div class="d-flex justify-content-center">
-        <div class="m-1"><a class="btn btn-outline-secondary" asp-controller="Vendor" asp-action="GetSortedVendorList" asp-route-startingLetter="A" asp-route-endingLetter="Z">All</a></div>
-        @*<form class="m-1" id="vendorAllRequest" asp-controller="Vendor" asp-action="GetSortedVendorList"
-        asp-route-startingLetter="A" asp-route-endingLetter="Z"
-        method="post" enctype="application/x-www-form-urlencoded">
-            <button class="btn btn-outline-secondary" type="submit" onclick="event.preventDefault(); document.getElementById('vendorAllRequest').submit();">
+
+        <div class="m-1">
+            <a class="btn btn-outline-secondary
+                @((Model.startingLetter == "A" && Model.endingLetter == "Z" ) ? "active" : "")" asp-controller="Vendor" asp-action="GetSortedVendorList" asp-route-startingLetter="A" asp-route-endingLetter="Z">
                 All
-            </button>
-        </form>*@
+            </a>
+        </div>
 
         @for (int i = 0; i < 5; i++)
         {
@@ -31,22 +44,19 @@
             {
                 endingLetter = ((char)90).ToString();
             }
-
-            <form class="m-1" id="vendorAlphaRequest-@i" asp-controller="Vendor" asp-action="GetSortedVendorList" 
-            asp-route-startingLetter="@startingLetter" asp-route-endingLetter="@endingLetter" 
-            method="post" enctype="application/x-www-form-urlencoded">
-                <button class="btn btn-outline-secondary" type="submit" onclick="event.preventDefault(); document.getElementById('vendorAlphaRequest-@i').submit();">
+            <div class="m-1">
+                <a class="btn btn-outline-secondary @((startingLetter == Model.startingLetter && endingLetter == Model.endingLetter) ? "active" : "")"
+               asp-controller="Vendor" asp-action="GetSortedVendorList" asp-route-startingLetter="@startingLetter" asp-route-endingLetter="@endingLetter">
                     @startingLetter - @endingLetter
-                </button>
-                
-            </form>
+                </a>
+            </div>
         }
         
-        <form class="m-1 bd-highlight" id="vendorAddRequest" asp-controller="Vendor" asp-action="Add">
-            <button class="btn btn-primary" type="submit" onclick="event.preventDefault(); document.getElementById('vendorAddRequest').submit();">
+        <div class="m-1">
+            <a class="btn btn-primary bd-highlight" asp-controller="Vendor" asp-action="AddVendor">
                 Add New Vendor
-            </button>
-        </form>
+            </a>
+        </div>
     </div>
     
 </div>
@@ -92,7 +102,8 @@
                                 </div>
                             </td>
                             <td class="text-center">
-                                <form id="vendorDeleteRequest-@i" asp-controller="Vendor" asp-action="Delete" asp-route-id="@Model.vendors.ElementAt(i).VendorId">
+                                <form id="vendorDeleteRequest-@i" asp-controller="Vendor" asp-action="Delete" asp-route-id="@Model.vendors.ElementAt(i).VendorId"
+                                      method="post" enctype="application/x-www-form-urlencoded">
                                     <button class="btn btn-outline-danger" type="submit" onclick="event.preventDefault(); document.getElementById('vendorDeleteRequest-@i').submit();">
                                         Delete
                                     </button>

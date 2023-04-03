@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Numerics;
 using VendorInvoicing.Components;
@@ -23,7 +24,8 @@ namespace VendorInvoicing.Controllers
     {
         private VendorsContext _vendorsContext;
         private IVendorInvoicingService _vendorInvoicingService;
-        public VendorController(VendorsContext vendorsContext, IVendorInvoicingService vendorInvoicingService) {
+        public VendorController(VendorsContext vendorsContext, IVendorInvoicingService vendorInvoicingService)
+        {
             _vendorsContext = vendorsContext;
             _vendorInvoicingService = vendorInvoicingService;
         }
@@ -46,6 +48,22 @@ namespace VendorInvoicing.Controllers
                 vendorListViewModel.vendors = _vendorInvoicingService.GetAllVendors();
             }
             vendorListViewModel.DeletedVendorId = _vendorInvoicingService.GetDeletedVendorId();
+            if (vendorListViewModel.DeletedVendorId != null &&
+                vendorListViewModel.DeletedVendorId != 0 &&
+                (bool)vendorListViewModel.BackgroundDeleteAllowed)
+            {
+                TempData["LastActionMessage"] = $"The Vendor '{_vendorInvoicingService.GetVendorById((int)vendorListViewModel.DeletedVendorId).Name}' was permanently deleted.";
+                _vendorInvoicingService.DeleteAllisDeletedVendors();
+            }
+            else if (vendorListViewModel.DeletedVendorId != null &&
+                vendorListViewModel.DeletedVendorId != 0)
+            {
+                vendorListViewModel.BackgroundDeleteAllowed = true;
+            }
+            else
+            {
+                vendorListViewModel.BackgroundDeleteAllowed = false;
+            }
             return View("List", vendorListViewModel);
         }
         [HttpPost("/Vendor/List/")]
@@ -68,7 +86,21 @@ namespace VendorInvoicing.Controllers
 
             if (vendor != null)
             {
-                return View("Edit", vendor);
+                VendorRequest vendorRequest = new VendorRequest()
+                {
+                    Address1 = vendor.Address1,
+                    Address2 = vendor.Address2,
+                    City = vendor.City,
+                    Name = vendor.Name,
+                    ProvinceOrState = vendor.ProvinceOrState,
+                    VendorContactEmail = vendor.VendorContactEmail,
+                    VendorContactFirstName = vendor.VendorContactFirstName,
+                    VendorContactLastName = vendor.VendorContactLastName,
+                    VendorId = vendor.VendorId,
+                    VendorPhone = vendor.VendorPhone,
+                    ZipOrPostalCode = vendor.ZipOrPostalCode,
+                };
+                return View("Edit", vendorRequest);
             }
             else
             {
@@ -77,31 +109,75 @@ namespace VendorInvoicing.Controllers
             }
         }
         [HttpPost("/Vendor/Edit/{id}")]
-        public IActionResult UpdateVendor(int id, Vendor vendorFromView)
+        public IActionResult UpdateVendor(int id, VendorRequest vendorFromView)
         {
             Vendor vendorFromDB = _vendorInvoicingService.GetVendorById(id);
-
-            if (vendorFromDB != null)
+            if (ModelState.IsValid)
             {
-                vendorFromDB.Name = vendorFromView.Name;
-                vendorFromDB.Address1 = vendorFromView.Address1;
-                vendorFromDB.Address2 = vendorFromView.Address2;
-                vendorFromDB.City = vendorFromView.City;
-                vendorFromDB.ProvinceOrState = vendorFromView.ProvinceOrState;
-                vendorFromDB.ZipOrPostalCode = vendorFromView.ZipOrPostalCode;
-                vendorFromDB.VendorContactLastName = vendorFromView.VendorContactLastName;
-                vendorFromDB.VendorContactFirstName = vendorFromView.VendorContactFirstName;
-                vendorFromDB.VendorContactEmail = vendorFromView.VendorContactEmail;
-                vendorFromDB.VendorPhone = vendorFromView.VendorPhone;
-                _vendorInvoicingService.UpdateVendor(vendorFromDB);
 
-                TempData["LastActionMessage"] = $"Successfully modified \"{vendorFromView.Name}\".";
+
+                if (vendorFromDB != null)
+                {
+                    vendorFromDB.Name = vendorFromView.Name;
+                    vendorFromDB.Address1 = vendorFromView.Address1;
+                    vendorFromDB.Address2 = vendorFromView.Address2;
+                    vendorFromDB.City = vendorFromView.City;
+                    vendorFromDB.ProvinceOrState = vendorFromView.ProvinceOrState;
+                    vendorFromDB.ZipOrPostalCode = vendorFromView.ZipOrPostalCode;
+                    vendorFromDB.VendorContactLastName = vendorFromView.VendorContactLastName;
+                    vendorFromDB.VendorContactFirstName = vendorFromView.VendorContactFirstName;
+                    vendorFromDB.VendorContactEmail = vendorFromView.VendorContactEmail;
+                    vendorFromDB.VendorPhone = vendorFromView.VendorPhone;
+                    _vendorInvoicingService.UpdateVendor(vendorFromDB);
+
+                    TempData["LastActionMessage"] = $"Successfully modified \"{vendorFromView.Name}\".";
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Error finding selected entry.";
+                }
+                return RedirectToAction("GetVendorList", "Vendor");
             }
-            else
+            return View("Edit", vendorFromView);
+        }
+        [HttpGet("/Vendor/Add/")]
+        public IActionResult AddVendor()
+        {
+            VendorRequest vendorRequest = new VendorRequest();
+            return View("Add", vendorRequest);
+        }
+
+        [HttpPost("/Vendor/Add/")]
+        public IActionResult AddVendor(VendorRequest vendorFromView)
+        {
+            if (ModelState.IsValid)
             {
-                TempData["ErrorMessage"] = "Error finding selected entry.";
+
+                Vendor vendor = new Vendor()
+                {
+                    Name = vendorFromView.Name,
+                    Address1 = vendorFromView.Address1,
+                    Address2 = vendorFromView.Address2,
+                    City = vendorFromView.City,
+                    ProvinceOrState = vendorFromView.ProvinceOrState,
+                    ZipOrPostalCode = vendorFromView.ZipOrPostalCode,
+                    VendorContactLastName = vendorFromView.VendorContactLastName,
+                    VendorContactFirstName = vendorFromView.VendorContactFirstName,
+                    VendorContactEmail = vendorFromView.VendorContactEmail,
+                    VendorPhone = vendorFromView.VendorPhone
+                };
+
+                if (_vendorInvoicingService.AddVendor(vendor))
+                {
+                    TempData["LastActionMessage"] = $"Successfully created \"{vendorFromView.Name}\".";
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Error adding vendor.";
+                }
+                return RedirectToAction("GetVendorList", "Vendor");
             }
-            return RedirectToAction("GetVendorList", "Vendor");
+            return View("Add", vendorFromView);
         }
         [HttpGet("/Vendor/{vendorId}/Invoices/")]
         public IActionResult GetInvoicesForVendor(int vendorId)
@@ -249,12 +325,13 @@ namespace VendorInvoicing.Controllers
                 if (_vendorInvoicingService.DeleteVendorById(id))
                 {
                     TempData["LastActionMessageUndo"] = $"Successfully deleted \"{vendor.Name}\".";
+                    return RedirectToAction("GetVendorList", "Vendor");
                 }
                 else
                 {
                     TempData["ErrorMessage"] = $"Failed to delete {vendor.Name}.";
+                    return RedirectToAction("GetVendorList", "Vendor");
                 }
-                return RedirectToAction("GetVendorList", "Vendor");
             }
             else
             {

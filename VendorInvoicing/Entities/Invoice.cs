@@ -1,4 +1,6 @@
-﻿namespace VendorInvoicing.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace VendorInvoicing.Entities
 {
     public class Invoice
     {
@@ -30,6 +32,7 @@
         // Nav to associated terms:
         public PaymentTerms? PaymentTerm { get; set; }
         // Nav to All terms
+        [NotMapped]
         public List<PaymentTerms>? PaymentTerms { get; set; }
 
         // FK:

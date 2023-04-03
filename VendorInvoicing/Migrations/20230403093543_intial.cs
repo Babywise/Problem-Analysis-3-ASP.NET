@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace VendorInvoicing.Migrations
 {
     /// <inheritdoc />
-    public partial class trypaymentlistv8 : Migration
+    public partial class intial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -34,14 +34,14 @@ namespace VendorInvoicing.Migrations
                     VendorId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProvinceOrState = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ZipOrPostalCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    VendorPhone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    VendorContactLastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    VendorContactFirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProvinceOrState = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false),
+                    ZipOrPostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VendorPhone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VendorContactLastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VendorContactFirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     VendorContactEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -57,7 +57,6 @@ namespace VendorInvoicing.Migrations
                     InvoiceId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     InvoiceDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    PaymentTotal = table.Column<double>(type: "float", nullable: true),
                     PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     PaymentTermsId = table.Column<int>(type: "int", nullable: false),
                     VendorId = table.Column<int>(type: "int", nullable: false),
@@ -66,6 +65,12 @@ namespace VendorInvoicing.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Invoices", x => x.InvoiceId);
+                    table.ForeignKey(
+                        name: "FK_Invoices_PaymentTerms_PaymentTermsId",
+                        column: x => x.PaymentTermsId,
+                        principalTable: "PaymentTerms",
+                        principalColumn: "PaymentTermsId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Invoices_Vendors_VendorId",
                         column: x => x.VendorId,
@@ -91,30 +96,7 @@ namespace VendorInvoicing.Migrations
                         name: "FK_InvoiceLineItems_Invoices_InvoiceId",
                         column: x => x.InvoiceId,
                         principalTable: "Invoices",
-                        principalColumn: "InvoiceId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "InvoicePaymentTerms",
-                columns: table => new
-                {
-                    InvoicesInvoiceId = table.Column<int>(type: "int", nullable: false),
-                    PaymentTermsId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_InvoicePaymentTerms", x => new { x.InvoicesInvoiceId, x.PaymentTermsId });
-                    table.ForeignKey(
-                        name: "FK_InvoicePaymentTerms_Invoices_InvoicesInvoiceId",
-                        column: x => x.InvoicesInvoiceId,
-                        principalTable: "Invoices",
                         principalColumn: "InvoiceId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_InvoicePaymentTerms_PaymentTerms_PaymentTermsId",
-                        column: x => x.PaymentTermsId,
-                        principalTable: "PaymentTerms",
-                        principalColumn: "PaymentTermsId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -147,21 +129,21 @@ namespace VendorInvoicing.Migrations
 
             migrationBuilder.InsertData(
                 table: "Invoices",
-                columns: new[] { "InvoiceId", "AmountPaid", "InvoiceDate", "PaymentDate", "PaymentTermsId", "PaymentTotal", "VendorId" },
+                columns: new[] { "InvoiceId", "AmountPaid", "InvoiceDate", "PaymentDate", "PaymentTermsId", "VendorId" },
                 values: new object[,]
                 {
-                    { 1, 10.0, new DateTime(2022, 8, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 0.0, 1 },
-                    { 2, 0.0, new DateTime(2022, 8, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 0.0, 1 },
-                    { 3, 7.0, new DateTime(2022, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 0.0, 2 },
-                    { 4, 0.0, new DateTime(2022, 9, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 4, 0.0, 2 },
-                    { 5, 11.0, new DateTime(2022, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 0.0, 3 },
-                    { 6, 0.0, new DateTime(2022, 10, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 4, 0.0, 3 },
-                    { 7, 13.0, new DateTime(2022, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 0.0, 4 },
-                    { 8, 0.0, new DateTime(2022, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 5, 0.0, 4 },
-                    { 9, 10.0, new DateTime(2022, 11, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 0.0, 5 },
-                    { 10, 6.0, new DateTime(2022, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 0.0, 6 },
-                    { 11, 2.0, new DateTime(2022, 12, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 2, 0.0, 7 },
-                    { 12, 5.0, new DateTime(2022, 12, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 0.0, 8 }
+                    { 1, 10.0, new DateTime(2022, 8, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 1 },
+                    { 2, 0.0, new DateTime(2022, 8, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 1 },
+                    { 3, 7.0, new DateTime(2022, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 2 },
+                    { 4, 0.0, new DateTime(2022, 9, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 4, 2 },
+                    { 5, 11.0, new DateTime(2022, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 3 },
+                    { 6, 0.0, new DateTime(2022, 10, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 4, 3 },
+                    { 7, 13.0, new DateTime(2022, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 4 },
+                    { 8, 0.0, new DateTime(2022, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 5, 4 },
+                    { 9, 10.0, new DateTime(2022, 11, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 5 },
+                    { 10, 6.0, new DateTime(2022, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 6 },
+                    { 11, 2.0, new DateTime(2022, 12, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 2, 7 },
+                    { 12, 5.0, new DateTime(2022, 12, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, 8 }
                 });
 
             migrationBuilder.InsertData(
@@ -199,8 +181,8 @@ namespace VendorInvoicing.Migrations
                 column: "InvoiceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InvoicePaymentTerms_PaymentTermsId",
-                table: "InvoicePaymentTerms",
+                name: "IX_Invoices_PaymentTermsId",
+                table: "Invoices",
                 column: "PaymentTermsId");
 
             migrationBuilder.CreateIndex(
@@ -214,9 +196,6 @@ namespace VendorInvoicing.Migrations
         {
             migrationBuilder.DropTable(
                 name: "InvoiceLineItems");
-
-            migrationBuilder.DropTable(
-                name: "InvoicePaymentTerms");
 
             migrationBuilder.DropTable(
                 name: "Invoices");

@@ -12,8 +12,8 @@ using VendorInvoicing.Entities;
 namespace VendorInvoicing.Migrations
 {
     [DbContext(typeof(VendorsContext))]
-    [Migration("20230402231552_updateAgain")]
-    partial class updateAgain
+    [Migration("20230403093543_intial")]
+    partial class intial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -350,12 +350,7 @@ namespace VendorInvoicing.Migrations
                     b.Property<int>("DueDays")
                         .HasColumnType("int");
 
-                    b.Property<int?>("InvoiceId")
-                        .HasColumnType("int");
-
                     b.HasKey("PaymentTermsId");
-
-                    b.HasIndex("InvoiceId");
 
                     b.ToTable("PaymentTerms");
 
@@ -562,7 +557,7 @@ namespace VendorInvoicing.Migrations
             modelBuilder.Entity("VendorInvoicing.Entities.Invoice", b =>
                 {
                     b.HasOne("VendorInvoicing.Entities.PaymentTerms", "PaymentTerm")
-                        .WithMany("Invoices")
+                        .WithMany()
                         .HasForeignKey("PaymentTermsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -582,28 +577,15 @@ namespace VendorInvoicing.Migrations
                 {
                     b.HasOne("VendorInvoicing.Entities.Invoice", "Invoice")
                         .WithMany("InvoiceLineItems")
-                        .HasForeignKey("InvoiceId");
+                        .HasForeignKey("InvoiceId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Invoice");
-                });
-
-            modelBuilder.Entity("VendorInvoicing.Entities.PaymentTerms", b =>
-                {
-                    b.HasOne("VendorInvoicing.Entities.Invoice", null)
-                        .WithMany("PaymentTerms")
-                        .HasForeignKey("InvoiceId");
                 });
 
             modelBuilder.Entity("VendorInvoicing.Entities.Invoice", b =>
                 {
                     b.Navigation("InvoiceLineItems");
-
-                    b.Navigation("PaymentTerms");
-                });
-
-            modelBuilder.Entity("VendorInvoicing.Entities.PaymentTerms", b =>
-                {
-                    b.Navigation("Invoices");
                 });
 
             modelBuilder.Entity("VendorInvoicing.Entities.Vendor", b =>

@@ -7,6 +7,7 @@ namespace VendorInvoicing.Models
     {
         public ICollection<Vendor> vendors { get; set; }
         public int? DeletedVendorId { get; set; }
+        public bool? BackgroundDeleteAllowed { get; set; } = false;
         public string? startingLetter { get; set; }
         public string? endingLetter { get; set; }
     }

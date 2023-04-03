@@ -4,6 +4,8 @@ namespace VendorInvoicing.Request_Entities
 {
     public class VendorRequest
     {
+        public int VendorId { get; set; }
+
         [Required(ErrorMessage = "Please enter a name.")]
         public string? Name { get; set; }
         [Required(ErrorMessage = "Please enter an address.")]

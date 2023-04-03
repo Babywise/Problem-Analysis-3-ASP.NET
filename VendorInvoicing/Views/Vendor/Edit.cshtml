@@ -1,4 +1,4 @@
-﻿@model Vendor
+﻿@model VendorRequest
 @{
     ViewData["Title"] = $"Editing: {Model.Name}";
 }
@@ -9,12 +9,13 @@
         </div>
     </div>
 </div>
-<div class="center">
+<div class="bg-light rounded p-5 mx-auto col-sm-10">
     <form asp-controller="Vendor" asp-action="UpdateVendor" asp-route-id="@Model.VendorId" method="post" enctype="application/x-www-form-urlencoded">
+
         <partial name="_VendorFormFieldsPartial" model="@Model" />
 
-        <div class="d-flex">
-            <div class="col-sm-3 mx-auto"> 
+        <div class="form-group row align-items-center text-nowrap">
+            <div class="text-center">
                 <button type="submit" class="btn btn-primary">Save Changes</button>
                 <a asp-controller="Vendor" asp-action="GetVendorList" class="btn btn-primary">Cancel</a>
             </div>
