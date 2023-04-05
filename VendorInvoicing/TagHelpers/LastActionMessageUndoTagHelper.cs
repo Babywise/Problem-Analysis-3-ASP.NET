@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
+using System;
+using static System.Collections.Specialized.BitVector32;
 
 namespace VendorInvoicing.TagHelpers
 {
@@ -19,31 +21,49 @@ namespace VendorInvoicing.TagHelpers
         {
             if (ViewContext.TempData.ContainsKey("LastActionMessageUndo"))
             {
+                /*<div class="alert alert-success alert-dismissible fade show text-nowrap" role="alert">
+                    <div class="align-items-center d-inline-flex">
+                        <span class="p-1">This is a message</span>
+                        <form asp-controller="Vendor" asp-action="UndoDelete" method="post" enctype="application/x-www-form-urlencoded">
+                            <input type="hidden" name="id" value="@Model.DeletedVendorId" />
+                            <button type="submit" class="btn btn-primary p-1" data-bs-dismiss="alert" aria-label="Undo">Undo</button>
+                        </form>
+                    </div>
+                    <div><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
+                </div>*/
+
                 // generate action URL:
                 var linkGenerator = (LinkGenerator)ViewContext.HttpContext.RequestServices.GetService(typeof(LinkGenerator));
                 var undoUrl = linkGenerator.GetPathByAction("UndoDelete", "Vendor", new { id = DeletedVendorId });
 
                 // build outer div:
                 var outerDiv = new TagBuilder("div");
-                outerDiv.AddCssClass("alert alert-success alert-dismissible fade show");
+                //outerDiv.AddCssClass("alert alert-success alert-dismissible fade show text-nowrap");
+                outerDiv.Attributes.Add("class", "alert alert-success alert-dismissible fade show text-nowrap");
                 outerDiv.Attributes.Add("role", "alert");
+                outerDiv.Attributes.Add("data-dismiss-timeout", "5000"); // 5000 milliseconds = 5 seconds
 
-                // build inner divs
-                var col10Div = new TagBuilder("div");
-                col10Div.AddCssClass("col-sm-10");
+                // build message div
+                var messageDiv = new TagBuilder("div");
+                messageDiv.AddCssClass("align-items-center d-inline-flex");
+
+                // build button div
+                var closeButtonDiv = new TagBuilder("div");
 
                 // build message span:
                 var messageSpan = new TagBuilder("span");
+                messageSpan.AddCssClass("p-1");
                 messageSpan.InnerHtml.Append(ViewContext.TempData["LastActionMessageUndo"].ToString());
 
                 // build form tag:
                 var form = new TagBuilder("form");
+                form.AddCssClass("container");
                 form.Attributes.Add("asp-controller", "Vendor");
                 form.Attributes.Add("asp-action", "UndoDelete");
                 form.Attributes.Add("method", "post");
                 form.Attributes.Add("enctype", "application/x-www-form-urlencoded");
 
-                // build route parameter for vendor id:
+                // build query route parameter for vendor id:
                 var routeParam = new TagBuilder("input");
                 routeParam.Attributes.Add("type", "hidden");
                 routeParam.Attributes.Add("name", "id");
@@ -59,12 +79,9 @@ namespace VendorInvoicing.TagHelpers
 
                 form.InnerHtml.AppendHtml(routeParam);
                 form.InnerHtml.AppendHtml(undoBtn);
-                // append form, message span to inner div secion 1:
-                col10Div.InnerHtml.AppendHtml(messageSpan);
-                col10Div.InnerHtml.AppendHtml(form);
 
-                var col2Div = new TagBuilder("div");
-                col2Div.AddCssClass("col-sm-2");
+                messageDiv.InnerHtml.AppendHtml(messageSpan);
+                messageDiv.InnerHtml.AppendHtml(form);
 
                 // build close button:
                 var closeBtn = new TagBuilder("button");
@@ -73,10 +90,10 @@ namespace VendorInvoicing.TagHelpers
                 closeBtn.Attributes.Add("data-bs-dismiss", "alert");
                 closeBtn.Attributes.Add("aria-label", "close");
 
-                col2Div.InnerHtml.AppendHtml(closeBtn);
+                closeButtonDiv.InnerHtml.AppendHtml(closeBtn);
 
-                outerDiv.InnerHtml.AppendHtml(col10Div);
-                outerDiv.InnerHtml.AppendHtml(col2Div);
+                outerDiv.InnerHtml.AppendHtml(messageDiv);
+                outerDiv.InnerHtml.AppendHtml(closeButtonDiv);
 
                 form.Attributes.Add("action", undoUrl);
 

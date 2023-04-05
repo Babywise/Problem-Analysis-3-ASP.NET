@@ -15,7 +15,7 @@ public class ClearDeletedVendorsService : BackgroundService
     {
         while (!stoppingToken.IsCancellationRequested)
         {
-            await Task.Delay(10000, stoppingToken); // Wait 10 seconds
+            await Task.Delay(10000, stoppingToken); // Wait 10 seconds before performing delete IsDeleted vendors from db
             using (var scope = _serviceScopeFactory.CreateScope())
             {
                 var vendorInvoicingService = scope.ServiceProvider.GetRequiredService<IVendorInvoicingService>();

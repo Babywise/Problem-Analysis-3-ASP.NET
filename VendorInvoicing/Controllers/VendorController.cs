@@ -4,20 +4,11 @@ using System;
 using System.Numerics;
 using VendorInvoicing.Components;
 using VendorInvoicing.Entities;
+using VendorInvoicing.Entities.Request_Entities;
 using VendorInvoicing.Models;
 using VendorInvoicing.Request_Entities;
 using VendorInvoicing.Services;
-/*
- /vendors/groups/L-M
-/vendors -> vendor collection
-/vendors/{id} -> specific vendor
-/vendors/{id}/invoices -> specific vendor invoices
-/vendors/{id}/invoices/{invid} -> particular invoice of a given vendor
-/vendors/{id}/invoices/{invid}/lineitems
-/vendors/{id}/invoices/{invid}/lineitems/something id
 
-
- */
 namespace VendorInvoicing.Controllers
 {
     public class VendorController : Controller
@@ -33,7 +24,7 @@ namespace VendorInvoicing.Controllers
         [HttpGet()]
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("GetVendorList", "Vendor");
         }
 
         [HttpGet("/Vendor/List/")]
@@ -48,39 +39,11 @@ namespace VendorInvoicing.Controllers
                 vendorListViewModel.vendors = _vendorInvoicingService.GetAllVendors();
             }
             vendorListViewModel.DeletedVendorId = _vendorInvoicingService.GetDeletedVendorId();
-            if (vendorListViewModel.DeletedVendorId != null &&
-                vendorListViewModel.DeletedVendorId != 0 &&
-                (bool)vendorListViewModel.BackgroundDeleteAllowed)
-            {
-                TempData["LastActionMessage"] = $"The Vendor '{_vendorInvoicingService.GetVendorById((int)vendorListViewModel.DeletedVendorId).Name}' was permanently deleted.";
-                _vendorInvoicingService.DeleteAllisDeletedVendors();
-            }
-            else if (vendorListViewModel.DeletedVendorId != null &&
-                vendorListViewModel.DeletedVendorId != 0)
-            {
-                vendorListViewModel.BackgroundDeleteAllowed = true;
-            }
-            else
-            {
-                vendorListViewModel.BackgroundDeleteAllowed = false;
-            }
             return View("List", vendorListViewModel);
-        }
-        [HttpPost("/Vendor/List/")]
-        public IActionResult GetSortedVendorList([FromQuery]VendorListViewModel vendorListViewModel)
-        {
-            if (vendorListViewModel.startingLetter != null && vendorListViewModel.endingLetter != null)
-            {
-                if (Char.IsLetter(Convert.ToChar(vendorListViewModel.startingLetter)) && Char.IsLetter(Convert.ToChar(vendorListViewModel.endingLetter)))
-                {
-                    return RedirectToAction("GetVendorList", "Vendor", vendorListViewModel);
-                }
-            }
-            return RedirectToAction("GetVendorList", "Vendor");
         }
         
         [HttpGet("/Vendor/Edit/{id}")]
-        public IActionResult GetEditVendor(int id)
+        public IActionResult GetEditVendor(int id, [FromQuery] string startingLetter, [FromQuery] string endingLetter)
         {
             Vendor vendor = _vendorInvoicingService.GetVendorById(id);
 
@@ -99,6 +62,8 @@ namespace VendorInvoicing.Controllers
                     VendorId = vendor.VendorId,
                     VendorPhone = vendor.VendorPhone,
                     ZipOrPostalCode = vendor.ZipOrPostalCode,
+                    startingLetter = startingLetter,
+                    endingLetter = endingLetter
                 };
                 return View("Edit", vendorRequest);
             }
@@ -114,8 +79,6 @@ namespace VendorInvoicing.Controllers
             Vendor vendorFromDB = _vendorInvoicingService.GetVendorById(id);
             if (ModelState.IsValid)
             {
-
-
                 if (vendorFromDB != null)
                 {
                     vendorFromDB.Name = vendorFromView.Name;
@@ -136,14 +99,18 @@ namespace VendorInvoicing.Controllers
                 {
                     TempData["ErrorMessage"] = "Error finding selected entry.";
                 }
-                return RedirectToAction("GetVendorList", "Vendor");
+                return RedirectToAction("GetVendorList", "Vendor", new { startingLetter = vendorFromView.startingLetter, endingLetter = vendorFromView.endingLetter });
             }
             return View("Edit", vendorFromView);
         }
         [HttpGet("/Vendor/Add/")]
-        public IActionResult AddVendor()
+        public IActionResult GetAddVendor([FromQuery] string startingLetter, [FromQuery] string endingLetter)
         {
-            VendorRequest vendorRequest = new VendorRequest();
+            VendorRequest vendorRequest = new VendorRequest()
+            {
+                startingLetter = startingLetter,
+                endingLetter = endingLetter,
+            };
             return View("Add", vendorRequest);
         }
 
@@ -175,16 +142,18 @@ namespace VendorInvoicing.Controllers
                 {
                     TempData["ErrorMessage"] = "Error adding vendor.";
                 }
-                return RedirectToAction("GetVendorList", "Vendor");
+                return RedirectToAction("GetVendorList", "Vendor", new { startingLetter = vendorFromView.startingLetter, endingLetter = vendorFromView.endingLetter });
             }
             return View("Add", vendorFromView);
         }
         [HttpGet("/Vendor/{vendorId}/Invoices/")]
-        public IActionResult GetInvoicesForVendor(int vendorId)
+        public IActionResult GetInvoicesForVendor(int vendorId, [FromQuery] string startingLetter, [FromQuery] string endingLetter)
         {
             VendorDetailsViewModel vendorDetailsViewModel = new VendorDetailsViewModel()
             {
                 vendor = _vendorInvoicingService.GetVendorById(vendorId),
+                startingLetter = startingLetter,
+                endingLetter = endingLetter
             };
 
             if (vendorDetailsViewModel.vendor != null)
@@ -283,7 +252,7 @@ namespace VendorInvoicing.Controllers
                 {
                     VendorId = invoiceDetailsViewModel.addInvoiceRequest.vendorId,
                     InvoiceDate = invoiceDetailsViewModel.addInvoiceRequest.InvoiceDate,
-                    PaymentTermsId = invoiceDetailsViewModel.addInvoiceRequest.PaymentTermsId,
+                    PaymentTermsId = (int)invoiceDetailsViewModel.addInvoiceRequest.PaymentTermsId,
                 };
                 if (_vendorInvoicingService.AddInvoice(invoice))
                 {

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.EntityFrameworkCore.Query;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VendorInvoicing.Entities
 {
@@ -12,8 +13,9 @@ namespace VendorInvoicing.Entities
         {
             get
             {
-                return InvoiceDate?.AddDays(Convert.ToDouble(PaymentTerms?.Where(
-                    pt => pt.PaymentTermsId == PaymentTermsId).FirstOrDefault()?.DueDays));
+                return InvoiceDate?.AddDays(Convert.ToDouble(PaymentTerm?.DueDays));
+                /*return InvoiceDate?.AddDays(Convert.ToDouble(PaymentTerms?.Where(
+                    pt => pt.PaymentTermsId == PaymentTermsId).FirstOrDefault()?.DueDays));*/
             }
         }
 

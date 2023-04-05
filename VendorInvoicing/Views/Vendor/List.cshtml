@@ -1,5 +1,5 @@
 ﻿@model VendorListViewModel
-@if (Model.DeletedVendorId != null && Model.DeletedVendorId != 0)
+@if (Model.DeletedVendorId != null)
 {
     <last-action-message-undo deleted-vendor-id="(int)@Model.DeletedVendorId" />
 }
@@ -7,26 +7,22 @@
     ViewData["Title"] = "List of Vendors";
     int buttonOffest = 4;
 }
-@*<div class="d-flex alert alert-success alert-dismissible fade show text-nowrap" role="alert">
-    <div class="align-items-center">
-        <div class="col-sm-10" style="display: inline-block;">
-            <span>This is a message</span>
-            <form asp-controller="Vendor" asp-action="UndoDelete" method="post" enctype="application/x-www-form-urlencoded">
-                <input type="hidden" name="id" value="@Model.DeletedVendorId" />
-                <button type="submit" class="btn btn-primary" data-bs-dismiss="alert" aria-label="Undo">Undo</button>
-            </form>
-        </div>
-        <div class="col-sm-2" style="display: inline-block;">
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+@*<div class="alert alert-success alert-dismissible fade show text-nowrap" role="alert">
+    <div class="align-items-center d-inline-flex">
+        <span class="p-1">This is a message</span>
+        <form asp-controller="Vendor" asp-action="UndoDelete" method="post" enctype="application/x-www-form-urlencoded">
+            <input type="hidden" name="id" value="@Model.DeletedVendorId" />
+            <button type="submit" class="btn btn-primary p-1" data-bs-dismiss="alert" aria-label="Undo">Undo</button>
+        </form>
     </div>
+    <div><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
 </div>*@
 <div class="text-center">
     <div class="d-flex justify-content-center">
-
+         
         <div class="m-1">
             <a class="btn btn-outline-secondary
-                @((Model.startingLetter == "A" && Model.endingLetter == "Z" ) ? "active" : "")" asp-controller="Vendor" asp-action="GetSortedVendorList" asp-route-startingLetter="A" asp-route-endingLetter="Z">
+                @((Model.startingLetter == "A" && Model.endingLetter == "Z" ) ? "active" : "")" asp-controller="Vendor" asp-action="GetVendorList" asp-route-startingLetter="A" asp-route-endingLetter="Z">
                 All
             </a>
         </div>
@@ -46,19 +42,20 @@
             }
             <div class="m-1">
                 <a class="btn btn-outline-secondary @((startingLetter == Model.startingLetter && endingLetter == Model.endingLetter) ? "active" : "")"
-               asp-controller="Vendor" asp-action="GetSortedVendorList" asp-route-startingLetter="@startingLetter" asp-route-endingLetter="@endingLetter">
+               asp-controller="Vendor" asp-action="GetVendorList" asp-route-startingLetter="@startingLetter" asp-route-endingLetter="@endingLetter">
                     @startingLetter - @endingLetter
                 </a>
             </div>
         }
         
         <div class="m-1">
-            <a class="btn btn-primary bd-highlight" asp-controller="Vendor" asp-action="AddVendor">
+            <a class="btn btn-primary bd-highlight" asp-controller="Vendor" asp-action="GetAddVendor"
+               asp-route-startingLetter="@Model.startingLetter" asp-route-endingLetter="@Model.endingLetter">
                 Add New Vendor
             </a>
         </div>
+
     </div>
-    
 </div>
 <div>
     <table class="table table-hover">
@@ -93,12 +90,15 @@
                             <td class="text-nowrap text-center">@Model.vendors.ElementAt(i).VendorPhone</td>
                             <td class="text-center">
                                 <div>
-                                    <a asp-controller="Vendor" asp-action="GetInvoicesForVendor" asp-route-vendorId="@Model.vendors.ElementAt(i).VendorId" class="btn btn-primary">Invoices</a>
+                                    <a asp-controller="Vendor" asp-action="GetInvoicesForVendor" asp-route-vendorId="@Model.vendors.ElementAt(i).VendorId"
+                                    asp-route-startingLetter="@Model.startingLetter" asp-route-endingLetter="@Model.endingLetter" class="btn btn-primary">Invoices</a>
                                 </div>
                             </td>
                             <td class="text-center">
                                 <div>
-                                    <a asp-controller="Vendor" asp-action="GetEditVendor" asp-route-id="@Model.vendors.ElementAt(i).VendorId" class="btn btn-outline-primary">Edit</a>
+                                    <a asp-controller="Vendor" asp-action="GetEditVendor" asp-route-id="@Model.vendors.ElementAt(i).VendorId" 
+                                    asp-route-startingLetter="@Model.startingLetter" asp-route-endingLetter="@Model.endingLetter" 
+                                    class="btn btn-outline-primary">Edit</a>
                                 </div>
                             </td>
                             <td class="text-center">

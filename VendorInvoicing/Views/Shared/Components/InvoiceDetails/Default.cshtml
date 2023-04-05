@@ -47,7 +47,7 @@
         <div class="col-sm-2 me-auto"><h4><b><label asp-for="addInvoiceRequest.PaymentTermsId">Terms: </label></b></h4></div>
         <div class="col-sm-8 ms-auto">
             <select asp-for="addInvoiceRequest.PaymentTermsId" class="form-control">
-                <option value="0">Please select a term option</option>
+                <option value="">Please select a term option</option>
                 @foreach (var p in Model.invoices.FirstOrDefault().PaymentTerms)
                 {
                     <option value="@p.PaymentTermsId">@p.Description</option>

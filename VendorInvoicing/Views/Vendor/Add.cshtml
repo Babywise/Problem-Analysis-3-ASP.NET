@@ -5,7 +5,14 @@
 <div class="container">
     <div class="d-flex p-1">
         <div class="flex-fill p-2">
-            <h4 class="float-end"><b><a asp-controller="Vendor" asp-action="GetVendorList">Return to Vendor List</a></b></h4>
+            <h4 class="float-end">
+                <b>
+                    <a asp-controller="Vendor" asp-action="GetVendorList"
+                       asp-route-startingLetter="@Model.startingLetter" asp-route-endingLetter="@Model.endingLetter">
+                        Return to Vendor List @(((Model.startingLetter != null && Model.endingLetter != null) ? $"({@Model.startingLetter} - {@Model.endingLetter})" : "(A - Z)"))
+                    </a>
+                </b>
+            </h4>
         </div>
     </div>
 </div>
@@ -19,8 +26,8 @@
 
         <div class="form-group row align-items-center text-nowrap">
             <div class="text-center">
-                <button type="submit" class="btn btn-primary">Save Changes</button>
-                <a asp-controller="Vendor" asp-action="GetVendorList" class="btn btn-primary">Cancel</a>
+                <button type="submit" class="btn btn-primary">Add New Vendor</button>
+                <a asp-controller="Vendor" asp-action="GetVendorList" asp-route-startingLetter="@Model.startingLetter" asp-route-endingLetter="@Model.endingLetter" class="btn btn-outline-primary">Cancel</a>
             </div>
         </div>
     </form>

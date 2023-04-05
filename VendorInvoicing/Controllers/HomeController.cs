@@ -12,7 +12,7 @@ namespace VendorInvoicing.Controllers
         {
             _logger = logger;
         }
-
+        //On Home Index, redirect to the vendor index
         public IActionResult Index()
         {
             return RedirectToAction("GetVendorList", "Vendor");

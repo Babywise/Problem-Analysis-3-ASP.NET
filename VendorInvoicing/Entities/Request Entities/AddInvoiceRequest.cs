@@ -10,7 +10,7 @@ namespace VendorInvoicing.Request_Entities
         public DateTime? InvoiceDate { get; set; }
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Please select a term option")]
-        public int PaymentTermsId { get; set; }
+        public int? PaymentTermsId { get; set; }
 
     }
 }

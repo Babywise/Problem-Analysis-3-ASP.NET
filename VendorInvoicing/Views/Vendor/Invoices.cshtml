@@ -6,7 +6,14 @@
 
     <div class="d-flex p-1">
         <div class="flex-fill p-2">
-            <h4 class="float-end"><b><a asp-controller="Vendor" asp-action="GetVendorList">Return to Vendor List</a></b></h4>
+            <h4 class="float-end">
+                <b>
+                    <a asp-controller="Vendor" asp-action="GetVendorList"
+                       asp-route-startingLetter="@Model.startingLetter" asp-route-endingLetter="@Model.endingLetter">
+                        Return to Vendor List @(((Model.startingLetter != null && Model.endingLetter != null) ? $"({@Model.startingLetter} - {@Model.endingLetter})" : "(A - Z)"))
+                    </a>
+                </b>
+            </h4>
         </div>
     </div>
     <div class="d-flex p-1">
@@ -29,14 +36,6 @@
         </div>
         <div class="flex-fill p-2 flex-column float-start col-sm-5">
             @await Component.InvokeAsync("InvoiceLineItems", new {vendorId=@Model.vendor.VendorId, invoiceId=@Model.SelectedInvoiceId})
-        </div>
-    </div>
-    <div class="d-flex p-1">
-        <div class="flex-fill p-2 flex-column float-start">
-            
-        </div>
-        <div class="flex-fill p-2 flex-column float-start">
-
         </div>
     </div>
 </div>

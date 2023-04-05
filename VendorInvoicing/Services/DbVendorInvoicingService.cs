@@ -96,6 +96,8 @@ namespace VendorInvoicing.Services
             vendors = _vendorsContext.Vendors
                 .Include(v => v.Invoices)
                     .ThenInclude(i => i.InvoiceLineItems)
+                .Include(v => v.Invoices)
+                    .ThenInclude(i => i.PaymentTerm)
                 .OrderBy(v => v.Name)
                 .ToList();
             if (vendors != null)

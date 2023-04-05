@@ -11,6 +11,7 @@ namespace VendorInvoicing.Components
         {
             _vendorInvoicingService = vendorInvoicingService;
         }
+        //InvoiceDetailsViewModel Controller for ViewComponent
         public async Task<IViewComponentResult> InvokeAsync(int vendorId, int invoiceId)
         {
             InvoiceDetailsViewModel invoiceDetailsViewModel = new InvoiceDetailsViewModel()

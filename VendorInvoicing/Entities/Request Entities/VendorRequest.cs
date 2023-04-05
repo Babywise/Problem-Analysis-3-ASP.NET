@@ -19,7 +19,7 @@ namespace VendorInvoicing.Request_Entities
         [StringLength(2, MinimumLength = 2, ErrorMessage = "Province or state must be a 2-letter abbreviation. (Ex. \"AB\")")]
         public string? ProvinceOrState { get; set; }
         [Required(ErrorMessage = "Please enter a zip or postal code.")]
-        [RegularExpression(@"^([A-Z]\d[A-Z] \d[A-Z]\d|\d{5}([\-]\d{4})?)$", ErrorMessage = "Please enter a valid zip or postal code.")]
+        [RegularExpression(@"^(?:[A-Za-z]\d[A-Za-z][- ]?\d[A-Za-z]\d|\d{5}(?:[-]\d{4})?)$", ErrorMessage = "Please enter a valid zip or postal code.")]
         [DataType(DataType.PostalCode)]
         public string? ZipOrPostalCode { get; set; }
         [Required(ErrorMessage = "Please enter a phone number.")]
@@ -32,6 +32,8 @@ namespace VendorInvoicing.Request_Entities
         public string? VendorContactFirstName { get; set; }
         [DataType(DataType.EmailAddress)]
         public string? VendorContactEmail { get; set; }
+        public string? startingLetter { get; set; }
+        public string? endingLetter { get; set; }
 
     }
 }
