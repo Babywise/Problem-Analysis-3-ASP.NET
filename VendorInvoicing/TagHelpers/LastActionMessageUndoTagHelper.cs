@@ -15,8 +15,10 @@ namespace VendorInvoicing.TagHelpers
         [HtmlAttributeNotBound()]
         public ViewContext ViewContext { get; set; }
 
+        //Parameter to pass into taghelper
         [HtmlAttributeName("deleted-vendor-id")]
         public int DeletedVendorId { get; set; }
+        //Generate button linked with vendorId
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
             if (ViewContext.TempData.ContainsKey("LastActionMessageUndo"))
@@ -100,7 +102,7 @@ namespace VendorInvoicing.TagHelpers
                 // set output content to be the outer div:
                 output.TagName = "div";
                 output.TagMode = TagMode.StartTagAndEndTag;
-                //output.Content.AppendHtml(outerDiv);
+                //output.Content.AppendHtml(outerDiv); (didnt work, needed async call)
                 output.Content.SetHtmlContent(await Task.FromResult(outerDiv));
             }
             else

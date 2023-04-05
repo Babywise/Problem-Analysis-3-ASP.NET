@@ -6,23 +6,15 @@
 @{
     ViewData["Title"] = "List of Vendors";
     int buttonOffest = 4;
+    string defaultSLetter = "A";
+    string defaultELetter = "Z";
 }
-@*<div class="alert alert-success alert-dismissible fade show text-nowrap" role="alert">
-    <div class="align-items-center d-inline-flex">
-        <span class="p-1">This is a message</span>
-        <form asp-controller="Vendor" asp-action="UndoDelete" method="post" enctype="application/x-www-form-urlencoded">
-            <input type="hidden" name="id" value="@Model.DeletedVendorId" />
-            <button type="submit" class="btn btn-primary p-1" data-bs-dismiss="alert" aria-label="Undo">Undo</button>
-        </form>
-    </div>
-    <div><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
-</div>*@
 <div class="text-center">
     <div class="d-flex justify-content-center">
          
         <div class="m-1">
-            <a class="btn btn-outline-secondary
-                @((Model.startingLetter == "A" && Model.endingLetter == "Z" ) ? "active" : "")" asp-controller="Vendor" asp-action="GetVendorList" asp-route-startingLetter="A" asp-route-endingLetter="Z">
+            <a class="btn btn-outline-secondary @((Model.startingLetter == defaultSLetter && Model.endingLetter == defaultELetter ) ? "active" : "")" 
+            asp-controller="Vendor" asp-action="GetVendorList" asp-route-startingLetter=@defaultSLetter asp-route-endingLetter=@defaultELetter>
                 All
             </a>
         </div>
@@ -30,16 +22,8 @@
         @for (int i = 0; i < 5; i++)
         {
             string startingLetter = ((char)((i * buttonOffest) + 65)).ToString();
-            string endingLetter;
+            string endingLetter = (i < 5 - 1) ? ((char)(((i + 1) * buttonOffest) + 65)).ToString() : ((char)90).ToString();
 
-            if (i < 5 - 1)
-            {
-                endingLetter = ((char)(((i + 1) * buttonOffest) + 65)).ToString();
-            }
-            else
-            {
-                endingLetter = ((char)90).ToString();
-            }
             <div class="m-1">
                 <a class="btn btn-outline-secondary @((startingLetter == Model.startingLetter && endingLetter == Model.endingLetter) ? "active" : "")"
                asp-controller="Vendor" asp-action="GetVendorList" asp-route-startingLetter="@startingLetter" asp-route-endingLetter="@endingLetter">
@@ -50,7 +34,8 @@
         
         <div class="m-1">
             <a class="btn btn-primary bd-highlight" asp-controller="Vendor" asp-action="GetAddVendor"
-               asp-route-startingLetter="@Model.startingLetter" asp-route-endingLetter="@Model.endingLetter">
+               asp-route-startingLetter="@((Model.startingLetter != null) ? Model.startingLetter : defaultSLetter)"
+               asp-route-endingLetter="@((Model.endingLetter != null) ? Model.endingLetter : defaultELetter)">
                 Add New Vendor
             </a>
         </div>
@@ -91,14 +76,21 @@
                             <td class="text-center">
                                 <div>
                                     <a asp-controller="Vendor" asp-action="GetInvoicesForVendor" asp-route-vendorId="@Model.vendors.ElementAt(i).VendorId"
-                                    asp-route-startingLetter="@Model.startingLetter" asp-route-endingLetter="@Model.endingLetter" class="btn btn-primary">Invoices</a>
+                                    asp-route-startingLetter="@((Model.startingLetter != null) ? Model.startingLetter : defaultSLetter)"
+                                    asp-route-endingLetter="@((Model.endingLetter != null) ? Model.endingLetter : defaultELetter)"
+                                    class="btn btn-primary">
+                                        Invoices
+                                    </a>
                                 </div>
                             </td>
                             <td class="text-center">
                                 <div>
-                                    <a asp-controller="Vendor" asp-action="GetEditVendor" asp-route-id="@Model.vendors.ElementAt(i).VendorId" 
-                                    asp-route-startingLetter="@Model.startingLetter" asp-route-endingLetter="@Model.endingLetter" 
-                                    class="btn btn-outline-primary">Edit</a>
+                                    <a asp-controller="Vendor" asp-action="GetEditVendor" asp-route-id="@Model.vendors.ElementAt(i).VendorId"
+                                    asp-route-startingLetter="@((Model.startingLetter != null) ? Model.startingLetter : defaultSLetter)"
+                                    asp-route-endingLetter="@((Model.endingLetter != null) ? Model.endingLetter : defaultELetter)"
+                                    class="btn btn-outline-primary">
+                                        Edit
+                                    </a>
                                 </div>
                             </td>
                             <td class="text-center">
@@ -110,10 +102,6 @@
                                 </form>
                             </td>
                         </tr>
-                    }
-                    else
-                    {
-
                     }
                 }
             }

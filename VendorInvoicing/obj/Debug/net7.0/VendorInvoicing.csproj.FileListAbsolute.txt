@@ -74,3 +74,5 @@ E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\obj\Debug\net7.0\refint\Ven
 E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\obj\Debug\net7.0\VendorInvoicing.pdb
 E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\obj\Debug\net7.0\VendorInvoicing.genruntimeconfig.cache
 E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\obj\Debug\net7.0\ref\VendorInvoicing.dll
+E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\bin\Debug\net7.0\VendorInvoicingClassLibrary.dll
+E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicing\bin\Debug\net7.0\VendorInvoicingClassLibrary.pdb

@@ -5,7 +5,15 @@ $(document).ready(function () {
         dateFormat: 'yy/mm/dd',
         changeMonth: true,
         changeYear: true,
-        yearRange: "-0:+100"
+        yearRange: "-0:+100",
+        beforeShow: function (input, inst) {
+            setTimeout(function () {
+                inst.dpDiv.css({
+                    top: input.offsetTop - $(input).outerHeight() - inst.dpDiv.outerHeight(),
+                    left: input.offsetLeft
+                });
+            }, 0);
+        }
     });
 });
 //Timeout for Alerts to disappear after
@@ -18,12 +26,13 @@ $(document).ready(function () {
         }, timeout);
     });
 });
-//Remove Query from Url (Not Needed but i thought was nice)
+//jQuery Number Selector
 $(document).ready(function () {
-    var uri = window.location.toString();
-
-    if (uri.indexOf("?") > 0) {
-        var clean_uri = uri.substring(0, uri.indexOf("?"));
-        window.history.replaceState({}, document.title, clean_uri);
-    }
+    $("#spinner").spinner({
+        culture: "en-US",
+        min: 5,
+        step: 0.50,
+        start: 1000,
+        numberFormat: "C"
+    });
 });

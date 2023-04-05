@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using VendorInvoicing.Models;
-using VendorInvoicing.Services;
+using VendorInvoicingClassLibrary.Services;
+using VendorInvoicingClassLibrary.Request_Entities;
 
 namespace VendorInvoicing.Components
 {
@@ -12,13 +12,15 @@ namespace VendorInvoicing.Components
         {
             _vendorInvoicingService = vendorInvoicingService;
         }
-        //InvoiceLineItemsViewModel Controller for ViewComponent
-        public async Task<IViewComponentResult> InvokeAsync(int vendorId, int invoiceId) {
+        //InvoiceLineItemsViewModel Controller for ViewComponent (Middle man between Parent View and ViewComponent)
+        public async Task<IViewComponentResult> InvokeAsync(int vendorId, int invoiceId, string startingLetter, string endingLetter) {
             InvoiceLineItemsViewModel invoiceLineItemsViewModel = new InvoiceLineItemsViewModel()
             {
                 vendorId = vendorId,
-                addLineItemRequest = new Request_Entities.AddLineItemRequest(),
+                addLineItemRequest = new AddLineItemRequest(),
                 invoice = _vendorInvoicingService.GetInvoiceById(invoiceId),
+                startingLetter = startingLetter,
+                endingLetter = endingLetter
             };
             return View(invoiceLineItemsViewModel); 
         }

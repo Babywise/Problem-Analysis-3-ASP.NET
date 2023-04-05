@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.Diagnostics;
 using System.ComponentModel.DataAnnotations;
 using VendorInvoicing.Components;
-using VendorInvoicing.Entities;
-using VendorInvoicing.Request_Entities;
+using VendorInvoicingClassLibrary.Entities;
+using VendorInvoicingClassLibrary.Request_Entities;
 
 namespace VendorInvoicing.Models
 {

@@ -1,0 +1,12 @@
+E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicingClassLibrary\obj\Debug\net7.0\VendorInvoicingClassLibrary.csproj.AssemblyReference.cache
+E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicingClassLibrary\obj\Debug\net7.0\VendorInvoicingClassLibrary.GeneratedMSBuildEditorConfig.editorconfig
+E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicingClassLibrary\obj\Debug\net7.0\VendorInvoicingClassLibrary.AssemblyInfoInputs.cache
+E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicingClassLibrary\obj\Debug\net7.0\VendorInvoicingClassLibrary.AssemblyInfo.cs
+E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicingClassLibrary\obj\Debug\net7.0\VendorInvoicingClassLibrary.csproj.CoreCompileInputs.cache
+E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicingClassLibrary\bin\Debug\net7.0\VendorInvoicingClassLibrary.deps.json
+E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicingClassLibrary\bin\Debug\net7.0\VendorInvoicingClassLibrary.dll
+E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicingClassLibrary\bin\Debug\net7.0\VendorInvoicingClassLibrary.pdb
+E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicingClassLibrary\obj\Debug\net7.0\VendorInvoicingClassLibrary.dll
+E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicingClassLibrary\obj\Debug\net7.0\refint\VendorInvoicingClassLibrary.dll
+E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicingClassLibrary\obj\Debug\net7.0\VendorInvoicingClassLibrary.pdb
+E:\Coding\ASP.NET\Problem Analysis 3\VendorInvoicingClassLibrary\obj\Debug\net7.0\ref\VendorInvoicingClassLibrary.dll

@@ -4,14 +4,14 @@
     "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\VendorInvoicing.csproj": {}
   },
   "projects": {
-    "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\VendorInvoicing.csproj": {
+    "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicingClassLibrary\\VendorInvoicingClassLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\VendorInvoicing.csproj",
-        "projectName": "VendorInvoicing",
-        "projectPath": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\VendorInvoicing.csproj",
+        "projectUniqueName": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicingClassLibrary\\VendorInvoicingClassLibrary.csproj",
+        "projectName": "VendorInvoicingClassLibrary",
+        "projectPath": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicingClassLibrary\\VendorInvoicingClassLibrary.csproj",
         "packagesPath": "C:\\Users\\Islam\\.nuget\\packages\\",
-        "outputPath": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\obj\\",
+        "outputPath": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicingClassLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -43,6 +43,69 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\VendorInvoicing.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\VendorInvoicing.csproj",
+        "projectName": "VendorInvoicing",
+        "projectPath": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\VendorInvoicing.csproj",
+        "packagesPath": "C:\\Users\\Islam\\.nuget\\packages\\",
+        "outputPath": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicing\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Islam\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicingClassLibrary\\VendorInvoicingClassLibrary.csproj": {
+                "projectPath": "E:\\Coding\\ASP.NET\\Problem Analysis 3\\VendorInvoicingClassLibrary\\VendorInvoicingClassLibrary.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -57,6 +120,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.4, )"
+            },
+            "System.Text.RegularExpressions": {
+              "target": "Package",
+              "version": "[4.3.1, )"
             }
           },
           "imports": [

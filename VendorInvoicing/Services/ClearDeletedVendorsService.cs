@@ -1,4 +1,4 @@
-﻿using VendorInvoicing.Services;
+﻿using VendorInvoicingClassLibrary.Services;
 
 public class ClearDeletedVendorsService : BackgroundService
 {
@@ -10,7 +10,7 @@ public class ClearDeletedVendorsService : BackgroundService
         _serviceScopeFactory = serviceScopeFactory;
         _logger = logger;
     }
-
+    //Use Db service to find and delete any "IsDeleted" vendors every 10 seconds
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         while (!stoppingToken.IsCancellationRequested)
@@ -19,13 +19,7 @@ public class ClearDeletedVendorsService : BackgroundService
             using (var scope = _serviceScopeFactory.CreateScope())
             {
                 var vendorInvoicingService = scope.ServiceProvider.GetRequiredService<IVendorInvoicingService>();
-                var vendorToDelete = vendorInvoicingService.GetDeletedVendorId();
-
-                if (vendorToDelete != null && vendorToDelete != 0)
-                {
-                    vendorInvoicingService.FinalDeleteVendorById((int)vendorToDelete);
-                    _logger.LogInformation($"Deleted vendor with ID {vendorToDelete}");
-                }
+                vendorInvoicingService.DeleteAllisDeletedVendors();
             }
         }
     }

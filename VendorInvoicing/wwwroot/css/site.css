@@ -32,14 +32,14 @@ tr.selected {
 
 /*Asp validation error css*/
 .input-validation-error {
-    border: 2px solid #dc3545; /* same red as text-danger */
-    background-color: #faebd7; /* antique white */
+    border: 2px solid #dc3545 !important; /* same red as text-danger */
+    background-color: #faebd7 !important; /* antique white */
 }
-/*Asp validation error css*/
+
 .validation-summary-valid {
     display: none;
 }
-/*Asp validation error css*/
+
 .validation-summary-errors ul {
     list-style: none;
 }
